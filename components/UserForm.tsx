@@ -11,7 +11,12 @@ interface LoginFormProps {
   error?: ErrorObject;
 }
 
-export default function LoginForm({ title, submitText, formAction, error }: LoginFormProps) {
+export default function LoginForm({
+  title,
+  submitText,
+  formAction,
+  error,
+}: LoginFormProps) {
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
