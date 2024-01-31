@@ -1,10 +1,10 @@
 import React from 'react';
 
-interface ErrorObject {
+type ErrorObject = {
   message: string;
 }
 
-interface LoginFormProps {
+type LoginFormProps = {
   title: string;
   submitText: string;
   formAction: (formData: FormData) => void;

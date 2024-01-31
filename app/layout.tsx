@@ -1,10 +1,10 @@
-import Header from "@/components/Header";
-import type { Metadata } from "next";
-import "./globals.css";
+import Header from '@/components/Header';
+import type { Metadata } from 'next';
+import './globals.css';
 
 export const metadata: Metadata = {
-  title: "- board",
-  description: "Dashboard project created by Nam Phan",
+  title: '- board',
+  description: 'Dashboard project created by Nam Phan',
 };
 
 export default function RootLayout({
@@ -14,9 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="h-full bg-gray-200">
+      <body className="h-screen bg-gray-200">
         <Header />
-        <main>{children}</main>
+        <main className="h-full">{children}</main>
       </body>
     </html>
   );
