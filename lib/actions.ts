@@ -3,7 +3,7 @@
 import { saveUser, isValidUser, isExistingUser } from './users';
 import { redirect } from 'next/navigation';
 import { FormStatus } from 'react-dom';
-import { FormUser } from './types';
+import { User, FormUser } from './types';
 
 function isValidPassword(password: FormDataEntryValue | null): boolean {
   const passwordString = String(password);
@@ -29,7 +29,7 @@ function getUserData(formData: FormData): FormUser {
 export async function registerUser(prevState: FormStatus, formData: FormData) {
   const user = getUserData(formData);
 
-  const duplicateUsername = isExistingUser(user);
+  const duplicateUsername = isExistingUser(user as User);
   if (duplicateUsername) {
     return { message: 'User name is already taken.' };
   }
@@ -38,17 +38,17 @@ export async function registerUser(prevState: FormStatus, formData: FormData) {
     return { message: 'Password is not valid.' };
   }
 
-  saveUser(user);
+  saveUser(user as User);
   redirect('/');
 }
 
 export async function loginUser(prevState: FormStatus, formData: FormData) {
   const user = getUserData(formData);
-  const login = isValidUser(user);
+  const login = isValidUser(user as User);
 
   if (!login.success) {
     return { message: 'You entered credentials are not correct.' };
   }
 
-  return { message: 'Login successful!', token: login.token };
+  return { message: 'Login successful!', token: login.token as string };
 }

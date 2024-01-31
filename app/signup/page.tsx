@@ -5,6 +5,7 @@ import { registerUser } from '@/lib/actions';
 import { useFormState } from 'react-dom';
 
 export default function Signup() {
+  // @ts-ignore
   const [state, formAction] = useFormState(registerUser, { message: null });
 
   return (

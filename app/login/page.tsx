@@ -17,6 +17,7 @@ async function loginAndSetToken(prevState: FormStatus, formData: FormData) {
 }
 
 export default function Login() {
+  // @ts-ignore
   const [state, formAction] = useFormState(loginAndSetToken, { message: null });
 
   return (
