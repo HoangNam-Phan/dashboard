@@ -4,6 +4,8 @@ import LoginForm from '@/app/[lng]/components/UserForm';
 import { loginUser } from '@/lib/utils/actions';
 import { useFormState } from 'react-dom';
 import { FormStatus } from 'react-dom';
+import { useTranslation } from '@/app/i18n/client';
+import { LanguageParams } from '@/lib/types';
 
 function setCookie(name: string, value: string, days: number) {
   const expirationDate = new Date();
@@ -22,14 +24,15 @@ async function loginAndSetToken(prevState: FormStatus, formData: FormData) {
   return login;
 }
 
-export default function Login() {
+export default function Login({ params: { lng } }: LanguageParams) {
   // @ts-ignore
   const [state, formAction] = useFormState(loginAndSetToken, { message: null });
+  const { t } = useTranslation(lng);
 
   return (
     <>
       <LoginForm
-        title="Log in"
+        title={t('title')}
         submitText="Log in"
         formAction={formAction}
         error={state}

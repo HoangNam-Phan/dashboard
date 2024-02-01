@@ -1,4 +1,8 @@
 {
-  "title": "Welcome to - board!",
-  "subtitle": "To be able to use this tool, please go ahead and create an account and login. Don't worry, you wont need to enter an e-mail :)"
+  "login": "Login",
+  "signup": "Sign up",
+  "homepage": {
+    "title": "Welcome to - board!",
+    "subtitle": "To be able to use this tool, please go ahead and create an account and login. Don't worry, you wont need to enter an e-mail :)"
+  }
 }

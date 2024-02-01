@@ -4,13 +4,12 @@ import { initReactI18next } from 'react-i18next/initReactI18next';
 import { getOptions } from './settings';
 
 const initI18next = async (lang, ns) => {
-  const locale = lang;
   const i18nInstance = createInstance();
   await i18nInstance
     .use(initReactI18next)
     .use(
       resourcesToBackend((language, namespace) =>
-        import(`./locales/${locale}/${namespace}.json`)
+        import(`./locales/${lang}/${namespace}.json`)
       )
     )
     .init(getOptions(lang, ns));
