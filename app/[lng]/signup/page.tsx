@@ -1,7 +1,7 @@
 'use client';
 
-import SignupForm from '@/components/UserForm';
-import { registerUser } from '@/lib/actions';
+import SignupForm from '@/app/[lng]/components/UserForm';
+import { registerUser } from '@/lib/utils/actions';
 import { useFormState } from 'react-dom';
 
 export default function Signup() {

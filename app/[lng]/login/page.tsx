@@ -1,7 +1,7 @@
 'use client';
 
-import LoginForm from '@/components/UserForm';
-import { loginUser } from '@/lib/actions';
+import LoginForm from '@/app/[lng]/components/UserForm';
+import { loginUser } from '@/lib/utils/actions';
 import { useFormState } from 'react-dom';
 import { FormStatus } from 'react-dom';
 

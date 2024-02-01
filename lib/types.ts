@@ -14,4 +14,10 @@ type UserEntry = {
   token?: string;
 };
 
-export type { User, FormUser, UserEntry };
+type LanguageParams = {
+  params: {
+    lng: string;
+  }
+}
+
+export type { User, FormUser, UserEntry, LanguageParams };
