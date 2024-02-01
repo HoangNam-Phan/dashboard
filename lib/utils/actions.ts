@@ -1,9 +1,9 @@
 'use server';
 
-import { saveUser, isValidUser, isExistingUser } from './users';
+import { saveUser, isValidUser, isExistingUser } from '../users';
 import { redirect } from 'next/navigation';
 import { FormStatus } from 'react-dom';
-import { User, FormUser } from './types';
+import { User, FormUser } from '../types';
 
 function isValidPassword(password: FormDataEntryValue | null): boolean {
   const passwordString = String(password);
