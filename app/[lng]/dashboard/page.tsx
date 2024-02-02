@@ -15,7 +15,7 @@ const apps = [
   },
   {
     name: 'TODO COMPONENT',
-    customClasses: 'row-start-3 row-span-2 sm:row-start-3 lg:row-start-1',
+    customClasses: 'row-start-3 row-span-2 lg:row-start-1',
   },
   {
     name: 'NOTES COMPONENT',
@@ -29,7 +29,7 @@ export default function Dashboard() {
       <div
         className={`
         bg-gray-100 shadow-md rounded-lg bg-white p-5 sm:p-10 pt-14 sm:pt-20 h-full w-full
-        grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 
+        grid grid-cols-2 lg:grid-cols-4 
         grid-rows-4 sm:grid-rows-4 lg:grid-rows-2 gap-5
         `}
       >
