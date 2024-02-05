@@ -7,7 +7,7 @@ type CardProps = {
 
 export default function Button({ children, customClasses }: CardProps) {
   return (
-    <div className={`shadow-lg rounded-lg bg-white p-3 ${customClasses}`}>
+    <div className={`shadow-lg rounded-lg bg-white p-5 ${customClasses}`}>
       {children}
     </div>
   );
