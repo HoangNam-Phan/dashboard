@@ -52,13 +52,11 @@ export default function Weather() {
         <div className="flex justify-evenly	space-x-10">
           {imgSrcs.map((img, index) => {
             return (
-              <div className="text-sm flex flex-col items-center space-y-1">
-                <img
-                  key={`${img}-${index}`}
-                  src={img}
-                  width="50px"
-                  height="50px"
-                />
+              <div
+                key={`${img}-${index}`}
+                className="text-sm flex flex-col items-center space-y-1"
+              >
+                <img src={img} width="50px" height="50px" />
                 <div>
                   <span>{weatherData.daily.temperature_2m_min[index]}° / </span>
                   <span className="font-bold">
