@@ -26,7 +26,7 @@ export default function Weather() {
 
   if (isLoading) {
     return <div>Loading...</div>;
-  }
+  };
 
   if (weatherData) {
     return (
