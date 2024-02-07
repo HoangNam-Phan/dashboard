@@ -20,10 +20,10 @@ type LanguageParams = {
   };
 };
 
-type Todo = {
+type TodoItem = {
   id: number;
   text: string;
   deadline: string;
 };
 
-export type { User, FormUser, UserEntry, LanguageParams, Todo };
+export type { User, FormUser, UserEntry, LanguageParams, TodoItem };

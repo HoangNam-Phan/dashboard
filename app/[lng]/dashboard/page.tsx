@@ -5,7 +5,7 @@ import store from '@/store/store';
 import Card from '@/app/[lng]/components/modules/Card';
 import Weather from '@/app/[lng]/components/Weather';
 import Stocks from '@/app/[lng]/components/Stocks';
-import Todos from '@/app/[lng]/components/Todos';
+import Todos from '@/app/[lng]/components/todo/Todos';
 
 export default function Dashboard() {
   return (
@@ -13,7 +13,7 @@ export default function Dashboard() {
       <div className="h-full flex items-center justify-center">
         <div
           className={`
-        bg-stone-300 shadow-md rounded-lg bg-white p-5 sm:p-10 pt-14 sm:pt-20 h-full w-full
+        bg-slate-300 shadow-md rounded-lg bg-white p-5 sm:p-10 pt-14 sm:pt-20 h-full w-full
         grid grid-cols-2 lg:grid-cols-4 
         grid-rows-4 sm:grid-rows-4 lg:grid-rows-2 gap-5
         `}
@@ -27,10 +27,10 @@ export default function Dashboard() {
           <Card customClasses="row-start-3 lg:row-start-1">
             CLOCK COMPONENT
           </Card>
-          <Card customClasses="bg-stone-400 row-start-3 row-span-2 lg:row-start-1">
+          <Card customClasses="bg-orange-300 row-start-3 row-span-2 lg:row-start-1">
             <Todos />
           </Card>
-          <Card customClasses="row-start-4 lg:row-start-2">
+          <Card customClasses="bg-yellow-200 row-start-4 lg:row-start-2">
             NOTES COMPONENT
           </Card>
         </div>
