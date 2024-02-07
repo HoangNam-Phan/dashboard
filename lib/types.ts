@@ -17,7 +17,13 @@ type UserEntry = {
 type LanguageParams = {
   params: {
     lng: string;
-  }
-}
+  };
+};
 
-export type { User, FormUser, UserEntry, LanguageParams };
+type Todo = {
+  id: number;
+  text: string;
+  deadline: string;
+};
+
+export type { User, FormUser, UserEntry, LanguageParams, Todo };

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Button from '@/app/[lng]/components/Button';
+import Button from '@/app/[lng]/components/modules/Button';
 import { LanguageParams } from '@/lib/types';
 import { useTranslation } from '../i18n';
 
