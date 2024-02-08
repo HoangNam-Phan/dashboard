@@ -6,6 +6,7 @@ import Card from '@/app/[lng]/components/modules/Card';
 import Weather from '@/app/[lng]/components/Weather';
 import Stocks from '@/app/[lng]/components/Stocks';
 import Todos from '@/app/[lng]/components/todo/Todos';
+import News from '@/app/[lng]/components/News';
 
 export default function Dashboard() {
   return (
@@ -24,14 +25,11 @@ export default function Dashboard() {
           <Card customClasses="bg-white col-span-2 col-start-1 row-start-2">
             <Stocks />
           </Card>
-          <Card customClasses="bg-blue-200 row-start-3 lg:row-start-1">
-            CLOCK COMPONENT
+          <Card customClasses="bg-gray-200 row-start-4 row-span-2 lg:row-start-1">
+            <News />
           </Card>
           <Card customClasses="bg-orange-200 row-start-3 row-span-2 lg:row-start-1">
             <Todos />
-          </Card>
-          <Card customClasses="bg-yellow-200 row-start-4 lg:row-start-2">
-            NOTES COMPONENT
           </Card>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import type { FormTodo, TodoItem } from '@/lib/types';
+import type { FormTodo } from '@/lib/types';
 import { FormStatus } from 'react-dom';
 
 function getTodoData(formData: FormData, id: number | undefined): FormTodo {

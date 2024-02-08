@@ -79,7 +79,7 @@ export default function TodoComponent() {
   return (
     <>
       <div className="h-full flex flex-col relative">
-        <h2 className="text-3xl mb-5">TODOS</h2>
+        <h2 className="text-2xl font-bold mb-8">Todo list</h2>
         {isLoading ? (
           <div>Loading...</div>
         ) : (

@@ -37,6 +37,26 @@ type ErrorObject = {
   message: string;
 } | null;
 
+type Article = {
+  source: {
+    id: string;
+    name: string;
+  };
+  author: string;
+  title: string;
+  description: string | null;
+  url: string;
+  urlToImage: string | null;
+  publishedAt: string;
+  content: string | null;
+};
+
+type NewsResponse = {
+  status: string;
+  totalResults: number;
+  articles: Article[];
+} | null;
+
 export type {
   User,
   FormUser,
@@ -45,4 +65,5 @@ export type {
   TodoItem,
   ErrorObject,
   FormTodo,
+  NewsResponse,
 };
