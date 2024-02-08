@@ -4,6 +4,27 @@ import { useEffect, useState } from 'react';
 import { getImagesByCodes } from '@/lib/utils/weather';
 import { WeatherData } from '@/lib/utils/weather';
 
+const weekdays = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
+
+function currentWeekDay(date: string) {
+  const dateObject = new Date(date);
+  const currentWeekday = dateObject.getDay();
+
+  return weekdays[currentWeekday];
+}
+
+function currentWeekDayShort(weekday: string) {
+  return weekday.substring(0, 3);
+}
+
 export default function Weather() {
   const userLattitude = '53.5502';
   const userLongitude = '9.9920';
@@ -26,7 +47,7 @@ export default function Weather() {
 
   if (isLoading) {
     return <div>Loading...</div>;
-  };
+  }
 
   if (weatherData) {
     return (
@@ -44,6 +65,9 @@ export default function Weather() {
               </span>
             </div>
             <div className="flex flex-col text-right">
+              <span className="text-3xl">
+                {currentWeekDay(weatherData.daily.time[0])}
+              </span>
               <span>{weatherData.daily.time[0]}</span>
               <span>Hamburg</span>
             </div>
@@ -57,10 +81,19 @@ export default function Weather() {
                 className="text-sm flex flex-col items-center space-y-1"
               >
                 <img src={img} width="50px" height="50px" />
-                <div>
-                  <span>{weatherData.daily.temperature_2m_min[index]}° / </span>
-                  <span className="font-bold">
-                    {weatherData.daily.temperature_2m_max[index]}°
+                <div className="text-center flex flex-col">
+                  <div>
+                    <span>
+                      {weatherData.daily.temperature_2m_min[index]}°/{' '}
+                    </span>
+                    <span className="font-bold">
+                      {weatherData.daily.temperature_2m_max[index]}°
+                    </span>
+                  </div>
+                  <span>
+                    {currentWeekDayShort(
+                      currentWeekDay(weatherData.daily.time[index])
+                    )}
                   </span>
                 </div>
               </div>

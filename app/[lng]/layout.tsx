@@ -27,6 +27,7 @@ export default function RootLayout({
   return (
     <html lang={lng} dir={dir(lng)}>
       <body className="h-screen bg-gray-200">
+        <div id="modal-wrapper"></div>
         <Header lang={''} />
         <main className="h-full">{children}</main>
       </body>

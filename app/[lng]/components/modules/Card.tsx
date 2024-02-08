@@ -5,9 +5,9 @@ type CardProps = {
   customClasses: string | undefined;
 };
 
-export default function Button({ children, customClasses }: CardProps) {
+export default function Card({ children, customClasses }: CardProps) {
   return (
-    <div className={`shadow-lg rounded-lg bg-white p-5 ${customClasses}`}>
+    <div className={`shadow-lg rounded-lg p-5 ${customClasses}`}>
       {children}
     </div>
   );
