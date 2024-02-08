@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { User, UserEntry } from './types';
 
-const db = sql('logins.db');
+const db = sql('userdata.db');
 
 function hashPassword(password: string | Buffer) {
   return bcrypt.hashSync(password, 10);
@@ -20,7 +20,7 @@ function getPasswordMatch(password: string | Buffer, storedPassword: string) {
 }
 
 //to be deleted, just for testing purposes
-function logAllUsers() {
+export default function logAllUsers() {
   const logins = db.prepare('SELECT * FROM logins').all();
   console.log(logins);
 }
@@ -64,6 +64,7 @@ export function saveUser(user: User) {
     token,
   });
 }
+
 export function isValidUser(user: User) {
   if (user.userName === 'admin' && user.password === 'admin') {
     return { success: true, token: 1 };

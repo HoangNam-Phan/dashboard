@@ -1,67 +1,115 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useFormState, FormStatus } from 'react-dom';
 import Modal from '../modules/Modal';
 import type { TodoItem } from '@/lib/types';
 import { useDispatch } from 'react-redux';
-import { openModal } from '@/store/actions';
+import { closeModal, openModal } from '@/store/actions';
 import { Todo } from './Todo';
 import TodoForm from './TodoForm';
-
-const testTodos = [
-  {
-    id: 1,
-    text: 'Finish TypeScript assignment',
-    deadline: '2024-02-10',
-  },
-  {
-    id: 2,
-    text: 'Grocery shopping for the week',
-    deadline: '2024-02-08',
-  },
-  {
-    id: 3,
-    text: 'Schedule dentist appointment',
-    deadline: '2024-02-15',
-  },
-  {
-    id: 4,
-    text: 'Book flight tickets',
-    deadline: '2024-03-01',
-  },
-];
+import { mutateTodo } from '@/lib/utils/todoActions';
 
 export default function TodoComponent() {
-  const dispatch = useDispatch();
+  // @ts-ignore
+  const [state, formAction] = useFormState(handleFormAction, { message: null });
+  const [actionType, setActionType] = useState<string>('');
   const [currentTodo, setCurrentTodo] = useState<TodoItem | null>(null);
+  const [todoData, setTodoData] = useState<TodoItem[]>();
+  const [isLoading, setLoading] = useState(true);
+  const [triggerFetch, setTriggerFetch] = useState(0);
+  const dispatch = useDispatch();
 
-  const handleAddClick = () => {
+  useEffect(() => {
+    const fetchTodos = async () => {
+      const response = await fetch('/api/todos', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!response.ok) {
+        console.error('Failed to fetch todos');
+        setLoading(false);
+        return;
+      }
+      const todosData = await response.json();
+      setTodoData(todosData.todos);
+      setLoading(false);
+    };
+
+    fetchTodos();
+  }, [triggerFetch]);
+
+  function handleAddClick() {
+    setActionType('POST');
+    setCurrentTodo(null);
     dispatch(openModal());
-  };
+  }
 
-  const handleEditClick = (todo: TodoItem) => {
+  function handleEditClick(todo: TodoItem) {
+    setActionType('PUT');
     setCurrentTodo(todo);
     dispatch(openModal());
-  };
+  }
+
+  async function handleDeleteClick(todo: TodoItem) {
+    setActionType('DELETE');
+    setCurrentTodo(todo);
+    dispatch(openModal());
+  }
+
+  async function handleFormAction(prevState: FormStatus, formData: FormData) {
+    const response = await mutateTodo(
+      prevState,
+      formData,
+      actionType,
+      currentTodo?.id
+    );
+
+    if (!response.ok) {
+      const responseBody = await response.json();
+      return { message: responseBody.error };
+    }
+
+    dispatch(closeModal());
+    setTriggerFetch(triggerFetch + 1);
+  }
 
   return (
     <>
-      <div className="h-full relative">
-        <h2 className='text-3xl mb-5'>TODOS</h2>
-        <ol>
-          {testTodos.map((todo) => (
-            <Todo todo={todo} key={todo.text} onEdit={handleEditClick} />
-          ))}
-        </ol>
-        <button
-          className="text-5xl absolute bottom-0 right-0"
-          onClick={handleAddClick}
-        >
-          +
-        </button>
+      <div className="h-full flex flex-col relative">
+        <h2 className="text-3xl mb-5">TODOS</h2>
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          <div className="h-5/6 pr-3 overflow-y-auto">
+            <ol>
+              {todoData?.map((todo) => (
+                <Todo
+                  todo={todo}
+                  key={todo.text}
+                  onEdit={handleEditClick}
+                  onDelete={() => handleDeleteClick(todo)}
+                />
+              ))}
+            </ol>
+            <button
+              className="text-5xl absolute bottom-0 right-0"
+              onClick={handleAddClick}
+            >
+              +
+            </button>
+          </div>
+        )}
       </div>
       <Modal>
-        <TodoForm currentTodo={currentTodo} />
+        <TodoForm
+          actionType={actionType}
+          currentTodo={currentTodo}
+          formAction={formAction}
+          error={state}
+        />
       </Modal>
     </>
   );

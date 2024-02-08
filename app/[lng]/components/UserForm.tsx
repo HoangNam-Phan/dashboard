@@ -1,8 +1,5 @@
 import React from 'react';
-
-type ErrorObject = {
-  message: string;
-}
+import type { ErrorObject } from '@/lib/types';
 
 type LoginFormProps = {
   title: string;

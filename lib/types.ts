@@ -9,6 +9,7 @@ type FormUser = {
 };
 
 type UserEntry = {
+  id: number;
   userName: string;
   password: string;
   token?: string;
@@ -20,10 +21,28 @@ type LanguageParams = {
   };
 };
 
+type FormTodo = {
+  text: FormDataEntryValue | null;
+  deadline: FormDataEntryValue | null;
+  id?: number | undefined;
+};
+
 type TodoItem = {
   id: number;
   text: string;
   deadline: string;
 };
 
-export type { User, FormUser, UserEntry, LanguageParams, TodoItem };
+type ErrorObject = {
+  message: string;
+} | null;
+
+export type {
+  User,
+  FormUser,
+  UserEntry,
+  LanguageParams,
+  TodoItem,
+  ErrorObject,
+  FormTodo,
+};
