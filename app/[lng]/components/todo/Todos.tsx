@@ -9,6 +9,7 @@ import { closeModal, openModal } from '@/store/actions';
 import { Todo } from './Todo';
 import TodoForm from './TodoForm';
 import { mutateTodo } from '@/lib/utils/todoActions';
+import { PlusCircleIcon } from '@heroicons/react/16/solid';
 
 export default function TodoComponent() {
   // @ts-ignore
@@ -79,11 +80,11 @@ export default function TodoComponent() {
   return (
     <>
       <div className="h-full flex flex-col relative">
-        <h2 className="text-2xl font-bold mb-8">Todo list</h2>
+        <h2 className="text-2xl font-bold mb-2 lg:mb-5">Todo list</h2>
         {isLoading ? (
           <div>Loading...</div>
         ) : (
-          <div className="h-5/6 pr-3 overflow-y-auto">
+          <div className="h-5/6 lg:pr-3 overflow-y-auto">
             <ol>
               {todoData?.map((todo) => (
                 <Todo
@@ -95,10 +96,10 @@ export default function TodoComponent() {
               ))}
             </ol>
             <button
-              className="text-5xl absolute bottom-0 right-0"
+              className="absolute bottom-0 right-0"
               onClick={handleAddClick}
             >
-              +
+              <PlusCircleIcon className="size-7 lg:size-10" />
             </button>
           </div>
         )}

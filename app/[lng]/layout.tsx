@@ -1,4 +1,5 @@
 import Header from '@/app/[lng]/components/Header';
+import Footer from '@/app/[lng]/components/Footer';
 import { dir } from 'i18next';
 import './globals.css';
 import { languages } from '../i18n/settings';
@@ -30,6 +31,7 @@ export default function RootLayout({
         <div id="modal-wrapper"></div>
         <Header lang={''} />
         <main className="h-full">{children}</main>
+        <Footer lang={''} />
       </body>
     </html>
   );

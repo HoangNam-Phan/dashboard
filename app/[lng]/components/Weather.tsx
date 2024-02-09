@@ -51,12 +51,17 @@ export default function Weather() {
 
   if (weatherData) {
     return (
-      <div>
-        <div className="flex p-7 space-x-5">
-          <img src={imgSrcs[0]} width="170px" height="170px" />
-          <div className="text-2xl flex w-full justify-between">
+      <div className="h-full flex flex-col justify-evenly divide-y-2">
+        <div className="flex p-3 2xl:p-7 space-x-5">
+          <img
+            src={imgSrcs[0]}
+            width="170px"
+            height="170px"
+            className="size-20 lg:size-36"
+          />
+          <div className="text-lg xl:text-2xl flex w-full justify-between space-x-2">
             <div className="flex flex-col space-y-2">
-              <span className="text-4xl text-right">
+              <span className="text-3xl 2xl:text-right">
                 {`${weatherData.current_weather.temperature}
                   ${weatherData.current_weather_units.temperature}`}
               </span>
@@ -65,7 +70,7 @@ export default function Weather() {
               </span>
             </div>
             <div className="flex flex-col text-right">
-              <span className="text-3xl">
+              <span className="font-semibold text-xl 2xl:text-3xl">
                 {currentWeekDay(weatherData.daily.time[0])}
               </span>
               <span>{weatherData.daily.time[0]}</span>
@@ -73,15 +78,20 @@ export default function Weather() {
             </div>
           </div>
         </div>
-        <div className="flex justify-evenly	space-x-10">
+        <div className="flex justify-evenly space-x-5 pt-2 sm:pt-5">
           {imgSrcs.map((img, index) => {
             return (
               <div
                 key={`${img}-${index}`}
                 className="text-sm flex flex-col items-center space-y-1"
               >
-                <img src={img} width="50px" height="50px" />
-                <div className="text-center flex flex-col">
+                <img
+                  src={img}
+                  width="50px"
+                  height="50px"
+                  className="size-8 xl:size-12 2xl:size-14"
+                />
+                <div className="text-sm md text-center flex flex-col">
                   <div>
                     <span>
                       {weatherData.daily.temperature_2m_min[index]}°/{' '}

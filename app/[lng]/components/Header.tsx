@@ -7,7 +7,7 @@ type HeaderProps = {
 
 export default async function Header({ lang }: HeaderProps) {
   return (
-    <header className="absolute top-0 right-0 bg-white shadow-md p-3 w-full flex justify-between pos-abs">
+    <header className="absolute top-0 right-0 p-3 w-full flex justify-between pos-abs">
       <Link href="/">- board</Link>
       <nav>
         {languages
