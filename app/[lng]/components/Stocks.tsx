@@ -3,12 +3,11 @@
 import { useState, useEffect } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import { popularStocksAndCrypto, testChartData, fetchStockData } from '@/lib/stocks';
-
-const chartStyles = {
-  width: '550px',
-  height: '350px',
-};
+import {
+  popularStocksAndCrypto,
+  testChartData,
+  fetchStockData,
+} from '@/lib/stocks';
 
 export default function Stocks() {
   const [displayedStock, setDisplayedStock] = useState(
@@ -17,14 +16,12 @@ export default function Stocks() {
   const [isLoading, setLoading] = useState(false);
   const [options, setOptions] = useState({});
 
-/*   useEffect(() => {
+  /*   useEffect(() => {
     const loadData = async () => {
       const data = await fetchStockData(displayedStock.identifier);
       const timeSeries = data['Time Series (60min)'];
       const chartCategories = [];
       const chartData = [];
-
-      console.log(data);
 
       for (let time in timeSeries) {
         chartCategories.push(time);
@@ -39,8 +36,13 @@ export default function Stocks() {
           categories: chartCategories.reverse(),
 
           labels: {
-            formatter: function (this: Highcharts.AxisLabelsFormatterContextObject): string {
-              return Highcharts.dateFormat('%H:%M', new Date(this.value).getTime());
+            formatter: function (
+              this: Highcharts.AxisLabelsFormatterContextObject
+            ): string {
+              return Highcharts.dateFormat(
+                '%H:%M',
+                new Date(this.value).getTime()
+              );
             },
           },
         },
@@ -48,6 +50,12 @@ export default function Stocks() {
           title: {
             text: 'Price (USD)',
           },
+        },
+        legend: {
+          enabled: false,
+        },
+        credits: {
+          enabled: false,
         },
         series: [
           {
@@ -70,17 +78,26 @@ export default function Stocks() {
       <HighchartsReact
         highcharts={Highcharts}
         options={testChartData}
-        containerProps={{ style: chartStyles }}
+        containerProps={{ style: { width: '100%', height: '100%' } }}
       />
       <div className="flex flex-col pb-5">
         <h2 className="text-xl mb-3">Trending</h2>
         <div className="flex flex-col overflow-y-auto">
-          <ol className="mr-5">
+          <ol className="mr-5 ml-2">
             {popularStocksAndCrypto.map((stock, index) => {
               return (
                 <button
-                  className="bg-gray-100 block shadow-lg rounded-lg text-left w-full p-2 my-3"
+                  className={`
+                    text-sm md:text-md text-center block shadow-lg text-blue-700 border border-blue-500
+                    rounded-lg text-left w-full p-1 sm:p-2 my-3 hover:bg-blue-500 hover:text-white
+                    ${
+                      stock === displayedStock
+                        ? 'disabled:bg-blue-500 text-white'
+                        : ''
+                    }
+                    `}
                   key={`${stock.identifier}-${index}`}
+                  disabled={stock === displayedStock}
                   onClick={() => setDisplayedStock(stock)}
                 >
                   <li>{stock.name}</li>

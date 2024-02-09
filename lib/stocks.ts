@@ -36,18 +36,23 @@ export const testChartData = {
       text: 'Price (USD)',
     },
   },
+  legend: {
+    enabled: false,
+  },
+  credits: {
+    enabled: false,
+  },
   series: [
     {
-      name: 'AAPL',
       data: [150.0, 151.2, 149.5, 152.3, 153.8],
     },
   ],
 };
 
 export async function fetchStockData(identifier: string) {
-  const apiKeys = ['NLCFSMIZZVO0H7CK', '9L07PLSOF1WETUUF'];
+  const apiKeys = ['9L07PLSOF1WETUUF', 'NLCFSMIZZVO0H7CK'];
   const res = await fetch(
-    `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${identifier}&interval=60min&apikey=9L07PLSOF1WETUUF`
+    `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${identifier}&interval=60min&apikey=NLCFSMIZZVO0H7CK`
   );
 
   if (!res.ok) {

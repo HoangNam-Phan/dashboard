@@ -1,4 +1,5 @@
 import type { TodoItem } from '@/lib/types';
+import { TrashIcon, PencilIcon } from '@heroicons/react/24/outline';
 
 type TodoProps = {
   todo: TodoItem;
@@ -23,8 +24,12 @@ export function Todo({ todo, onEdit, onDelete }: TodoProps) {
         </div>
       </div>
       <div className="mt-3 flex justify-end space-x-2">
-        <button onClick={handleEditClick}>Edit</button>
-        <button onClick={handleDeleteClick}>Delete</button>
+        <button onClick={handleEditClick}>
+          <PencilIcon className="size-5" />
+        </button>
+        <button onClick={handleDeleteClick}>
+          <TrashIcon className="size-5" />
+        </button>
       </div>
     </li>
   );
