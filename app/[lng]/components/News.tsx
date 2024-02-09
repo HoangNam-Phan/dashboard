@@ -35,13 +35,21 @@ export default function News() {
                 className="flex flex-col bg-white rounded-lg shadow-lg p-3"
                 key={`${article.author}-${article.publishedAt}`}
               >
-                <img
-                  className="rounded-lg hidden lg:block"
-                  src={article.urlToImage ?? ''}
-                  alt={article.title}
-                />
-                <h3 className="font-semibold mb-5 lg:my-5">{article.title}</h3>
-                <p className="mb-5">{article.description}</p>
+                {article.urlToImage ? (
+                  <img
+                    className="rounded-lg hidden lg:block"
+                    src={article.urlToImage ?? ''}
+                    alt={article.title}
+                  />
+                ) : null}
+                <h3
+                  className={`font-semibold mb-5 ${
+                    article.urlToImage ? 'lg:my-5' : 'mb-5'
+                  }`}
+                >
+                  {article.title}
+                </h3>
+                <p className="mb-5 overflow-x-hidden">{article.description}</p>
                 <span className="italic">
                   {article.author ? `- ${article.author}` : ''}
                 </span>
