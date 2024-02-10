@@ -6,7 +6,7 @@ type UserFormProps = {
   title: string;
   submitText: string;
   formAction: (formData: FormData) => void;
-  error?: UserErrorMessage;
+  error: UserErrorMessage;
   t: (key: string) => string;
 };
 
