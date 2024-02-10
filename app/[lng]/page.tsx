@@ -14,7 +14,7 @@ export default async function Home({ params: { lng } }: LanguageParams) {
           <Link href={`/${lng}/login`}>{t('login')}</Link>
         </Button>
         <Button>
-          <Link href={`/${lng}/signup`}>{t('signup')}</Link>
+          <Link href={`/${lng}/signup`}>{t('register')}</Link>
         </Button>
       </div>
     </div>

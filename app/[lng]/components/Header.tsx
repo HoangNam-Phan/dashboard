@@ -1,26 +1,28 @@
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { setLanguage } from '@/store/reducers/language';
 import Link from 'next/link';
-import { languages } from '@/app/i18n/settings';
 
-type HeaderProps = {
-  lang: string;
-};
+const LanguageToggler = () => {
+  const dispatch = useDispatch();
 
-export default async function Header({ lang }: HeaderProps) {
+  function toggleLanguage(lang: string) {
+    dispatch(setLanguage(lang));
+  }
+
   return (
     <header className="absolute top-0 right-0 p-3 w-full flex justify-between pos-abs">
-      <Link href="/">- board</Link>
-      <nav>
-        {languages
-          .filter((l) => lang !== l)
-          .map((l, index) => {
-            return (
-              <span key={l}>
-                {index > 0 && ' or '}
-                <Link href={`/${l}`}>{l}</Link>
-              </span>
-            );
-          })}
+      <h1>DASHHBOARD</h1>
+      <nav className="space-x-5">
+        <Link onClick={() => toggleLanguage('en')} href={`/en`}>
+          EN
+        </Link>
+        <Link onClick={() => toggleLanguage('de')} href={`/de`}>
+          DE
+        </Link>
       </nav>
     </header>
   );
-}
+};
+
+export default LanguageToggler;

@@ -11,7 +11,11 @@ import TodoForm from './TodoForm';
 import { mutateTodo } from '@/lib/utils/todoActions';
 import { PlusCircleIcon } from '@heroicons/react/16/solid';
 
-export default function TodoComponent() {
+type TodosProps = {
+  t: (key: string) => string;
+};
+
+export default function Todos({ t }: TodosProps) {
   // @ts-ignore
   const [state, formAction] = useFormState(handleFormAction, { message: null });
   const [actionType, setActionType] = useState<string>('');
@@ -80,7 +84,7 @@ export default function TodoComponent() {
   return (
     <>
       <div className="h-full flex flex-col relative">
-        <h2 className="text-2xl font-bold mb-2 lg:mb-5">Todo list</h2>
+        <h2 className="text-2xl font-bold mb-2 lg:mb-5">{t('todos.title')}</h2>
         {isLoading ? (
           <div>Loading...</div>
         ) : (
@@ -88,6 +92,7 @@ export default function TodoComponent() {
             <ol>
               {todoData?.map((todo) => (
                 <Todo
+                  t={t}
                   todo={todo}
                   key={todo.text}
                   onEdit={handleEditClick}
@@ -106,6 +111,7 @@ export default function TodoComponent() {
       </div>
       <Modal>
         <TodoForm
+          t={t}
           actionType={actionType}
           currentTodo={currentTodo}
           formAction={formAction}

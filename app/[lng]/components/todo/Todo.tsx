@@ -5,9 +5,10 @@ type TodoProps = {
   todo: TodoItem;
   onEdit: (todo: TodoItem) => void;
   onDelete: () => void;
+  t: (key: string) => string;
 };
 
-export function Todo({ todo, onEdit, onDelete }: TodoProps) {
+export function Todo({ todo, onEdit, onDelete, t }: TodoProps) {
   function handleEditClick() {
     onEdit(todo);
   }
@@ -20,7 +21,7 @@ export function Todo({ todo, onEdit, onDelete }: TodoProps) {
       <div>
         <p>{todo.text}</p>
         <div className="mt-5 text-right italic">
-          Due to: <span className="text-bold">{todo.deadline}</span>
+          {t('todos.dueDate')}<span className="text-bold">{todo.deadline}</span>
         </div>
       </div>
       <div className="mt-3 flex justify-end space-x-2">
