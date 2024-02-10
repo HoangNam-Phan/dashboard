@@ -1,6 +1,6 @@
 'use client';
 
-import SignupForm from '@/app/[lng]/components/UserForm';
+import SignupForm from '@/app/[lng]/components/forms/UserForm';
 import { registerUser } from '@/lib/utils/userActions';
 import { useFormState } from 'react-dom';
 import { useTranslation } from '@/app/i18n/client';
@@ -14,8 +14,8 @@ export default function Signup({ params: { lng } }: LanguageParams) {
   return (
     <>
       <SignupForm
-        title="signupTitle"
-        submitText="register"
+        title="register.title"
+        submitText="register.cta"
         formAction={formAction}
         error={state}
         t={t}

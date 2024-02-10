@@ -7,7 +7,7 @@ import type { TodoItem } from '@/lib/types';
 import { useDispatch } from 'react-redux';
 import { closeModal, openModal } from '@/store/actions';
 import { Todo } from './Todo';
-import TodoForm from './TodoForm';
+import TodoForm from '../forms/TodoForm';
 import { mutateTodo } from '@/lib/utils/todoActions';
 import { PlusCircleIcon } from '@heroicons/react/16/solid';
 
@@ -17,7 +17,7 @@ type TodosProps = {
 
 export default function Todos({ t }: TodosProps) {
   // @ts-ignore
-  const [state, formAction] = useFormState(handleFormAction, { message: null });
+  const [state, formAction] = useFormState(handleFormAction);
   const [actionType, setActionType] = useState<string>('');
   const [currentTodo, setCurrentTodo] = useState<TodoItem | null>(null);
   const [todoData, setTodoData] = useState<TodoItem[]>();

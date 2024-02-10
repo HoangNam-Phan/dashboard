@@ -1,11 +1,11 @@
 import type { TodoItem } from '@/lib/types';
-import type { ErrorObject } from '@/lib/types';
+import type { TodoErrorMessage } from '@/lib/types';
 
 type TodoFormProps = {
   actionType: string;
   currentTodo: TodoItem | null;
   formAction: (formData: FormData) => void;
-  error?: ErrorObject;
+  error?: TodoErrorMessage;
   t: (key: string) => string;
 };
 

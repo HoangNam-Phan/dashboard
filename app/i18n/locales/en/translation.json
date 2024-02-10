@@ -1,14 +1,32 @@
 {
-  "loginTitle": "Login",
-  "signupTitle": "Sign up",
-  "userName": "User name",
-  "password": "Password",
-  "register": "Register",
-  "login": "Login",
-
   "homepage": {
     "title": "Welcome to - board!",
     "subtitle": "To be able to use this tool, please go ahead and create an account and login. Don't worry, you wont need to enter an e-mail :)"
+  },
+
+  "userName": "User name",
+  "password": "Password",
+
+  "login": {
+    "title": "Login",
+    "cta": "Login"
+  },
+
+  "register": {
+    "title": "Sign up",
+    "cta": "Register"
+  },
+
+  "passwordTooltip": {
+    "title": "Password must have:",
+    "req1": "- at least 8 characters",
+    "req2": "- at least 1 number",
+    "req3": "- at least 1 uppercase letter"
+  },
+
+  "errorMessages": {
+    "userNameTaken": "User name is already taken!",
+    "passwordInvalid": "Password is not valid!"
   },
 
   "weather": {

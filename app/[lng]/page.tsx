@@ -11,10 +11,10 @@ export default async function Home({ params: { lng } }: LanguageParams) {
       <p>{t('homepage.subtitle')}</p>
       <div>
         <Button>
-          <Link href={`/${lng}/login`}>{t('login')}</Link>
+          <Link href={`/${lng}/login`}>{t('login.cta')}</Link>
         </Button>
         <Button>
-          <Link href={`/${lng}/signup`}>{t('register')}</Link>
+          <Link href={`/${lng}/signup`}>{t('register.cta')}</Link>
         </Button>
       </div>
     </div>

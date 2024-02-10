@@ -1,4 +1,4 @@
-import BodyWrapper from './components/BodyWrapper';
+import BodyWrapper from './components/layout/BodyWrapper';
 import { dir } from 'i18next';
 import './globals.css';
 import { languages } from '../i18n/settings';

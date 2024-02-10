@@ -33,7 +33,14 @@ type TodoItem = {
   deadline: string;
 };
 
-type ErrorObject = {
+type UserErrorMessage = {
+  message: {
+    userName: string,
+    password: string,
+  }
+} | null;
+
+type TodoErrorMessage = {
   message: string;
 } | null;
 
@@ -63,7 +70,8 @@ export type {
   UserEntry,
   LanguageParams,
   TodoItem,
-  ErrorObject,
+  UserErrorMessage,
+  TodoErrorMessage,
   FormTodo,
   NewsResponse,
 };
