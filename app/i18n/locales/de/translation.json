@@ -1,9 +1,45 @@
 {
+  "loginTitle": "Einloggen",
+  "signupTitle": "Registrieren",
+  "userName": "Benutzername",
+  "password": "Passwort",
+  "register": "Registrieren",
   "login": "Einloggen",
-  "signup": "Registrieren",
 
   "homepage": {
     "title": "Willkommen zu - board!",
     "subtitle": "Um dieses Tool nutzen zu können, erstellen Sie sich bitte einen Account und loggen Sie sich ein. Keine Sorge, es ist keine E-Mail notwendig :)"
+  },
+
+  "weather": {
+    "monday": "Montag",
+    "tuesday": "Dienstag",
+    "wednesday": "Mittwoch",
+    "thursday": "Donnerstag",
+    "friday": "Freitag",
+    "saturday": "Samstag",
+    "sunday": "Sonntag"
+  },
+
+  "stocks": {
+    "trending": "Im Trend"
+  },
+
+  "news": {
+    "title": "Aktuelle Nachrichten",
+    "readMore": "mehr..."
+  },
+
+  "todos": {
+    "title": "Todo Liste",
+    "dueDate": "Bis zum: ",
+    "form": {
+      "deleteWarning": "Bist du dir sicher, dass du diesen Eintrag löschen möchtest?",
+      "delete": "Todo löschen",
+      "content": "Todo Text: ",
+      "deadline": "Deadline: ",
+      "add": "Hinzufügen",
+      "save": "Speichern"
+    }
   }
 }

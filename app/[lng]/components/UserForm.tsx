@@ -1,26 +1,29 @@
 import React from 'react';
 import type { ErrorObject } from '@/lib/types';
 
-type LoginFormProps = {
+type UserFormProps = {
   title: string;
   submitText: string;
   formAction: (formData: FormData) => void;
   error?: ErrorObject;
-}
+  t: (key: string) => string;
+};
 
-export default function LoginForm({
+export default function UserForm({
   title,
   submitText,
   formAction,
   error,
-}: LoginFormProps) {
+  t,
+}: UserFormProps) {
+  const inputClasses = `block w-full mt-2 px-3 py-2 border-2 rounded-md focus:outline-none 
+                        focus:ring-2 focus:border-blue-500 hover:ring-1 hover:border-blue-200`;
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img className="mx-auto h-10 w-auto" src="" alt="Dashboard Logo" />
-          <h2 className="mt-10 text-center text-2xl font-bold tracking-tight text-gray-900">
-            {title}
+          <h2 className="text-center text-2xl font-bold tracking-tight text-gray-900">
+            {t(title)}
           </h2>
         </div>
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -30,7 +33,7 @@ export default function LoginForm({
                 htmlFor="userName"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Username
+                {t('userName')}
               </label>
               <div className="mt-2">
                 {error?.message && <p>{error.message}</p>}
@@ -40,7 +43,7 @@ export default function LoginForm({
                   type="userName"
                   autoComplete="userName"
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className={inputClasses}
                 />
               </div>
             </div>
@@ -50,7 +53,7 @@ export default function LoginForm({
                   htmlFor="password"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Password
+                  {t('password')}
                 </label>
               </div>
               <div className="mt-2">
@@ -60,16 +63,16 @@ export default function LoginForm({
                   type="password"
                   autoComplete="current-password"
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className={inputClasses}
                 />
               </div>
             </div>
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="flex w-full justify-center rounded-md bg-blue-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-700"
               >
-                {submitText}
+                {t(submitText)}
               </button>
             </div>
           </form>

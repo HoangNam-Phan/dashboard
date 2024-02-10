@@ -9,7 +9,11 @@ import {
   fetchStockData,
 } from '@/lib/stocks';
 
-export default function Stocks() {
+type StocksProps = {
+  t: (key: string) => string;
+};
+
+export default function Stocks({ t }: StocksProps) {
   const [displayedStock, setDisplayedStock] = useState(
     popularStocksAndCrypto[0]
   );
@@ -81,7 +85,7 @@ export default function Stocks() {
         containerProps={{ style: { width: '100%', height: '100%' } }}
       />
       <div className="flex flex-col pb-5">
-        <h2 className="text-xl mb-3">Trending</h2>
+        <h2 className="text-xl mb-3">{t('stocks.trending')}</h2>
         <div className="flex flex-col overflow-y-auto">
           <ol className="mr-5 ml-2">
             {popularStocksAndCrypto.map((stock, index) => {

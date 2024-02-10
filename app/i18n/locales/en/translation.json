@@ -1,9 +1,45 @@
 {
+  "loginTitle": "Login",
+  "signupTitle": "Sign up",
+  "userName": "User name",
+  "password": "Password",
+  "register": "Register",
   "login": "Login",
-  "signup": "Sign up",
 
   "homepage": {
     "title": "Welcome to - board!",
     "subtitle": "To be able to use this tool, please go ahead and create an account and login. Don't worry, you wont need to enter an e-mail :)"
+  },
+
+  "weather": {
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday"
+  },
+
+  "stocks": {
+    "trending": "Trending"
+  },
+
+  "news": {
+    "title": "Current News",
+    "readMore": "read more..."
+  },
+
+  "todos": {
+    "title": "Todo Liste",
+    "dueDate": "Due to: ",
+    "form": {
+      "deleteWarning": "Are you sure you want to delete this entry",
+      "delete": "Delete todo",
+      "content": "Todo Text: ",
+      "deadline": "Deadline: ",
+      "add": "Add",
+      "save": "Save"
+    }
   }
 }

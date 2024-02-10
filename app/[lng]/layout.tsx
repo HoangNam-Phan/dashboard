@@ -1,5 +1,4 @@
-import Header from '@/app/[lng]/components/Header';
-import Footer from '@/app/[lng]/components/Footer';
+import BodyWrapper from './components/BodyWrapper';
 import { dir } from 'i18next';
 import './globals.css';
 import { languages } from '../i18n/settings';
@@ -28,10 +27,7 @@ export default function RootLayout({
   return (
     <html lang={lng} dir={dir(lng)}>
       <body className="h-screen bg-gray-200">
-        <div id="modal-wrapper"></div>
-        <Header lang={''} />
-        <main className="h-full">{children}</main>
-        <Footer lang={''} />
+        <BodyWrapper>{children}</BodyWrapper>
       </body>
     </html>
   );

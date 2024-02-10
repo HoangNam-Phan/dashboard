@@ -5,13 +5,13 @@ import { getImagesByCodes } from '@/lib/utils/weather';
 import { WeatherData } from '@/lib/utils/weather';
 
 const weekdays = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
+  'sunday',
+  'monday',
+  'tuesday',
+  'wednesday',
+  'thursday',
+  'friday',
+  'saturday',
 ];
 
 function currentWeekDay(date: string) {
@@ -25,7 +25,11 @@ function currentWeekDayShort(weekday: string) {
   return weekday.substring(0, 3);
 }
 
-export default function Weather() {
+type WeatherProps = {
+  t: (key: string) => string;
+};
+
+export default function Weather({ t }: WeatherProps) {
   const userLattitude = '53.5502';
   const userLongitude = '9.9920';
   const [weatherData, setData] = useState<WeatherData>();
@@ -71,7 +75,7 @@ export default function Weather() {
             </div>
             <div className="flex flex-col text-right">
               <span className="font-semibold text-xl 2xl:text-3xl">
-                {currentWeekDay(weatherData.daily.time[0])}
+                {t(`weather.${[currentWeekDay(weatherData.daily.time[0])]}`)}
               </span>
               <span>{weatherData.daily.time[0]}</span>
               <span>Hamburg</span>
@@ -102,7 +106,11 @@ export default function Weather() {
                   </div>
                   <span>
                     {currentWeekDayShort(
-                      currentWeekDay(weatherData.daily.time[index])
+                      t(
+                        `weather.${[
+                          currentWeekDay(weatherData.daily.time[index]),
+                        ]}`
+                      )
                     )}
                   </span>
                 </div>

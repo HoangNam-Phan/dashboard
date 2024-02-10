@@ -32,10 +32,11 @@ export default function Login({ params: { lng } }: LanguageParams) {
   return (
     <>
       <LoginForm
-        title={t('login')}
-        submitText="Log in"
+        title="loginTitle"
+        submitText="login"
         formAction={formAction}
         error={state}
+        t={t}
       />
     </>
   );
