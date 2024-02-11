@@ -4,8 +4,8 @@ import Link from 'next/link';
 import { RootState } from '@/store/store';
 import { useSelector } from 'react-redux';
 import {
+  ArrowRightEndOnRectangleIcon,
   HomeIcon,
-  UserIcon,
   UserPlusIcon,
   TableCellsIcon,
   Cog6ToothIcon,
@@ -13,6 +13,13 @@ import {
 
 export default function Footer() {
   const lang = useSelector((state: RootState) => state.language.lang);
+  const loggedIn = useSelector((state: RootState) => state.login.loggedIn);
+  const navLinkStyles =
+    'py-1 lg:py-2 px-3 bg-white hover:bg-blue-500 hover:text-white';
+  const disabledNavLinkStyles = 'py-1 lg:py-2 px-3 text-gray-300 bg-white';
+  const conditionalNavClasses = loggedIn
+    ? disabledNavLinkStyles
+    : navLinkStyles;
 
   return (
     <footer className="fixed bottom-0 pb-3 w-full">
@@ -20,26 +27,20 @@ export default function Footer() {
         <div className="flex justify-center divide-x-2">
           <Link
             href={`/${lang}/login`}
-            className="bg-white py-1 lg:py-2 px-3 rounded-l-full"
+            className={`${conditionalNavClasses} rounded-l-full`}
           >
-            <UserIcon className="size-6" />
+            <ArrowRightEndOnRectangleIcon className="size-6" />
           </Link>
-          <Link
-            href={`/${lang}/signup`}
-            className="bg-white py-1 lg:py-2 px-3 "
-          >
+          <Link href={`/${lang}/signup`} className={conditionalNavClasses}>
             <UserPlusIcon className="size-6" />
           </Link>
-          <Link href={`/${lang}`} className="bg-white py-1 lg:py-2 px-3">
+          <Link href={`/${lang}`} className={navLinkStyles}>
             <HomeIcon className="size-6" />
           </Link>
-          <Link
-            href={`/${lang}/dashboard`}
-            className="bg-white py-1 lg:py-2 px-3"
-          >
+          <Link href={`/${lang}/dashboard`} className={navLinkStyles}>
             <TableCellsIcon className="size-6" />
           </Link>
-          <Link href="#" className="bg-white py-1 lg:py-2 px-3 rounded-r-full">
+          <Link href="#" className={`${navLinkStyles} rounded-r-full`}>
             <Cog6ToothIcon className="size-6" />
           </Link>
         </div>

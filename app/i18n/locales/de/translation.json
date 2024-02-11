@@ -14,7 +14,8 @@
 
   "register": {
     "title": "Registrieren",
-    "cta": "Registrieren"
+    "cta": "Registrieren",
+    "success": "Registrierung erfolgreich! Weiterleitung zur Login Seite..."
   },
 
   "passwordTooltip": {
@@ -53,7 +54,7 @@
     "dueDate": "Bis zum: ",
     "form": {
       "deleteWarning": "Bist du dir sicher, dass du diesen Eintrag löschen möchtest?",
-      "delete": "Todo löschen",
+      "delete": "Todo",
       "content": "Todo Text: ",
       "deadline": "Deadline: ",
       "add": "Hinzufügen",

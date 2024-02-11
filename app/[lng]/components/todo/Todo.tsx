@@ -21,14 +21,15 @@ export function Todo({ todo, onEdit, onDelete, t }: TodoProps) {
       <div>
         <p>{todo.text}</p>
         <div className="mt-5 text-right italic">
-          {t('todos.dueDate')}<span className="text-bold">{todo.deadline}</span>
+          {t('todos.dueDate')}
+          <span className="text-bold">{todo.deadline}</span>
         </div>
       </div>
       <div className="mt-3 flex justify-end space-x-2">
-        <button onClick={handleEditClick}>
+        <button type="button" onClick={handleEditClick}>
           <PencilIcon className="size-5" />
         </button>
-        <button onClick={handleDeleteClick}>
+        <button type="button" onClick={handleDeleteClick}>
           <TrashIcon className="size-5" />
         </button>
       </div>

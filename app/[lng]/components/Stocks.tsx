@@ -91,6 +91,7 @@ export default function Stocks({ t }: StocksProps) {
             {popularStocksAndCrypto.map((stock, index) => {
               return (
                 <button
+                  type="button"
                   className={`
                     text-sm md:text-md text-center block shadow-lg text-blue-700 border border-blue-500
                     rounded-lg text-left w-full p-1 sm:p-2 my-3 hover:bg-blue-500 hover:text-white

@@ -5,6 +5,7 @@ import { InformationCircleIcon } from '@heroicons/react/24/outline';
 type UserFormProps = {
   title: string;
   submitText: string;
+  success?: boolean;
   formAction: (formData: FormData) => void;
   error: UserErrorMessage;
   t: (key: string) => string;
@@ -13,6 +14,7 @@ type UserFormProps = {
 export default function UserForm({
   title,
   submitText,
+  success,
   formAction,
   error,
   t,
@@ -74,17 +76,19 @@ export default function UserForm({
                   required
                   className={inputClasses}
                 />
-                <div className="absolute right-3 top-3 group">
-                  <InformationCircleIcon className="h-5 w-5 group-hover:text-gray-600 cursor-pointer" />
-                  <div className="hidden group-hover:block absolute z-10 p-2 bg-gray-700 text-white rounded-lg text-sm -mt-16 ml-12 w-60">
-                    <span>{t('passwordTooltip.title')}</span>
-                    <ol>
-                      <li>{t('passwordTooltip.req1')}</li>
-                      <li>{t('passwordTooltip.req2')}</li>
-                      <li>{t('passwordTooltip.req3')}</li>
-                    </ol>
+                {submitText === 'register.cta' ? (
+                  <div className="absolute right-3 top-3 group">
+                    <InformationCircleIcon className="h-5 w-5 group-hover:text-gray-600 cursor-pointer" />
+                    <div className="hidden group-hover:block absolute z-10 p-2 bg-gray-700 text-white rounded-lg text-sm -mt-16 ml-12 w-60">
+                      <span>{t('passwordTooltip.title')}</span>
+                      <ol>
+                        <li>{t('passwordTooltip.req1')}</li>
+                        <li>{t('passwordTooltip.req2')}</li>
+                        <li>{t('passwordTooltip.req3')}</li>
+                      </ol>
+                    </div>
                   </div>
-                </div>
+                ) : null}
               </div>
             </div>
             <div>
@@ -94,6 +98,13 @@ export default function UserForm({
               >
                 {t(submitText)}
               </button>
+              {success ? (
+                <div className="absolute my-10 left-1/2 -translate-x-1/2">
+                  <p className="text-lg text-green-600 font-semibold">
+                    {t('register.success')}
+                  </p>
+                </div>
+              ) : null}
             </div>
           </form>
         </div>
