@@ -35,16 +35,8 @@ export default function Stocks({ t }: StocksProps) {
         },
         xAxis: {
           categories: chartCategories.reverse(),
-
           labels: {
-            formatter: function (
-              this: Highcharts.AxisLabelsFormatterContextObject
-            ): string {
-              return Highcharts.dateFormat(
-                '%H:%M',
-                new Date(this.value).getTime()
-              );
-            },
+            enabled: false,
           },
         },
         yAxis: {
