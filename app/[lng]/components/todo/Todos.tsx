@@ -5,11 +5,12 @@ import { useFormState, FormStatus } from 'react-dom';
 import Modal from '../modules/Modal';
 import type { TodoItem } from '@/lib/types';
 import { useDispatch } from 'react-redux';
-import { closeModal, openModal } from '@/store/actions';
+import { openModal, closeModal } from '@/store/reducers/modal';
 import { Todo } from './Todo';
-import TodoForm from './TodoForm';
+import TodoForm from '../forms/TodoForm';
 import { mutateTodo } from '@/lib/utils/todoActions';
-import { PlusCircleIcon } from '@heroicons/react/16/solid';
+import { PlusIcon } from '@heroicons/react/24/outline';
+import Loading from '../modules/Loading';
 
 type TodosProps = {
   t: (key: string) => string;
@@ -17,7 +18,7 @@ type TodosProps = {
 
 export default function Todos({ t }: TodosProps) {
   // @ts-ignore
-  const [state, formAction] = useFormState(handleFormAction, { message: null });
+  const [state, formAction] = useFormState(handleFormAction);
   const [actionType, setActionType] = useState<string>('');
   const [currentTodo, setCurrentTodo] = useState<TodoItem | null>(null);
   const [todoData, setTodoData] = useState<TodoItem[]>();
@@ -49,19 +50,19 @@ export default function Todos({ t }: TodosProps) {
   function handleAddClick() {
     setActionType('POST');
     setCurrentTodo(null);
-    dispatch(openModal());
+    dispatch(openModal('todo'));
   }
 
   function handleEditClick(todo: TodoItem) {
     setActionType('PUT');
     setCurrentTodo(todo);
-    dispatch(openModal());
+    dispatch(openModal('todo'));
   }
 
   async function handleDeleteClick(todo: TodoItem) {
     setActionType('DELETE');
     setCurrentTodo(todo);
-    dispatch(openModal());
+    dispatch(openModal('todo'));
   }
 
   async function handleFormAction(prevState: FormStatus, formData: FormData) {
@@ -77,7 +78,7 @@ export default function Todos({ t }: TodosProps) {
       return { message: responseBody.error };
     }
 
-    dispatch(closeModal());
+    dispatch(closeModal('todo'));
     setTriggerFetch(triggerFetch + 1);
   }
 
@@ -86,7 +87,7 @@ export default function Todos({ t }: TodosProps) {
       <div className="h-full flex flex-col relative">
         <h2 className="text-2xl font-bold mb-2 lg:mb-5">{t('todos.title')}</h2>
         {isLoading ? (
-          <div>Loading...</div>
+          <Loading />
         ) : (
           <div className="h-5/6 lg:pr-3 overflow-y-auto">
             <ol>
@@ -101,15 +102,16 @@ export default function Todos({ t }: TodosProps) {
               ))}
             </ol>
             <button
+              type="button"
               className="absolute bottom-0 right-0"
               onClick={handleAddClick}
             >
-              <PlusCircleIcon className="size-7 lg:size-10" />
+              <PlusIcon className="size-7" />
             </button>
           </div>
         )}
       </div>
-      <Modal>
+      <Modal id="todo">
         <TodoForm
           t={t}
           actionType={actionType}

@@ -72,12 +72,12 @@ export function isValidUser(user: User) {
 
   const storedUser: UserEntry = getStoredUser(user.userName);
   if (!storedUser) {
-    return { success: false, message: 'User does not exist' };
+    return { success: false, message: { userName: 'User does not exist!' } };
   }
 
   const passwordMatch = getPasswordMatch(user.password, storedUser.password);
   if (!passwordMatch) {
-    return { success: false, message: 'Incorrect password' };
+    return { success: false, message: { password: 'Incorrect password!' } };
   }
 
   const token = findUserToken(user);

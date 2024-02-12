@@ -1,14 +1,39 @@
 {
-  "loginTitle": "Login",
-  "signupTitle": "Sign up",
-  "userName": "User name",
-  "password": "Password",
-  "register": "Register",
-  "login": "Login",
-
   "homepage": {
     "title": "Welcome to - board!",
     "subtitle": "To be able to use this tool, please go ahead and create an account and login. Don't worry, you wont need to enter an e-mail :)"
+  },
+
+  "userName": "Username",
+  "password": "Password",
+
+  "login": {
+    "title": "Login",
+    "cta": "Login"
+  },
+
+  "register": {
+    "title": "Sign up",
+    "cta": "Register",
+    "success": "Registration successful! Redirecting to login page..."
+
+  },
+
+  "signOut": {
+    "text": "Are you sure you want to sign out?",
+    "cta": "Sign out"
+  },
+
+  "passwordTooltip": {
+    "title": "Password must have:",
+    "req1": "- at least 8 characters",
+    "req2": "- at least 1 number",
+    "req3": "- at least 1 uppercase letter"
+  },
+
+  "errorMessages": {
+    "userNameTaken": "User name is already taken!",
+    "passwordInvalid": "Password is not valid!"
   },
 
   "weather": {
@@ -22,7 +47,10 @@
   },
 
   "stocks": {
-    "trending": "Trending"
+    "chartTitle": "price chart",
+    "trending": "Trending",
+    "xAxisTitle": "Time",
+    "yAxisTitle": "Price"
   },
 
   "news": {
@@ -34,8 +62,8 @@
     "title": "Todo Liste",
     "dueDate": "Due to: ",
     "form": {
-      "deleteWarning": "Are you sure you want to delete this entry",
-      "delete": "Delete todo",
+      "deleteWarning": "Are you sure you want to delete this entry?",
+      "delete": "Delete",
       "content": "Todo Text: ",
       "deadline": "Deadline: ",
       "add": "Add",

@@ -32,10 +32,8 @@ function navigationGuard(req: NextRequest, lang: string | undefined | null) {
     }
     if (authToken) {
       if (
-        path === '/de' ||
         path === '/de/login' ||
         path === '/de/signup' ||
-        path === '/en' ||
         path === '/en/login' ||
         path === '/en/signup'
       ) {

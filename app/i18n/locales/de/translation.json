@@ -1,14 +1,38 @@
 {
-  "loginTitle": "Einloggen",
-  "signupTitle": "Registrieren",
-  "userName": "Benutzername",
-  "password": "Passwort",
-  "register": "Registrieren",
-  "login": "Einloggen",
-
   "homepage": {
     "title": "Willkommen zu - board!",
     "subtitle": "Um dieses Tool nutzen zu können, erstellen Sie sich bitte einen Account und loggen Sie sich ein. Keine Sorge, es ist keine E-Mail notwendig :)"
+  },
+
+  "userName": "Benutzername",
+  "password": "Passwort",
+
+  "login": {
+    "title": "Einloggen",
+    "cta": "Einloggen"
+  },
+
+  "register": {
+    "title": "Registrieren",
+    "cta": "Registrieren",
+    "success": "Registrierung erfolgreich! Weiterleitung zur Login Seite..."
+  },
+
+  "signOut": {
+    "text": "Sind Sie sicher, dass Sie sich abmelden wollen?",
+    "cta": "Abmelden"
+  },
+
+  "passwordTooltip": {
+    "title": "Das Password muss mind. :",
+    "req1": "- 8 Zeichen lang sein",
+    "req2": "- 1 Nummer haben",
+    "req3": "- 1 Großbuchstaben haben"
+  },
+
+  "errorMessages": {
+    "userNameTaken": "Name ist bereits vergeben!",
+    "passwordInvalid": "Password ist ungültig!"
   },
 
   "weather": {
@@ -22,7 +46,10 @@
   },
 
   "stocks": {
-    "trending": "Im Trend"
+    "chartTitle": "Preishistorie",
+    "trending": "Im Trend",
+    "xAxisTitle": "Zeit",
+    "yAxisTitle": "Preis"
   },
 
   "news": {
@@ -35,7 +62,7 @@
     "dueDate": "Bis zum: ",
     "form": {
       "deleteWarning": "Bist du dir sicher, dass du diesen Eintrag löschen möchtest?",
-      "delete": "Todo löschen",
+      "delete": "Todo",
       "content": "Todo Text: ",
       "deadline": "Deadline: ",
       "add": "Hinzufügen",

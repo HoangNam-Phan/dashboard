@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { getImagesByCodes } from '@/lib/utils/weather';
 import { WeatherData } from '@/lib/utils/weather';
+import Loading from './modules/Loading';
 
 const weekdays = [
   'sunday',
@@ -50,7 +51,7 @@ export default function Weather({ t }: WeatherProps) {
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (weatherData) {

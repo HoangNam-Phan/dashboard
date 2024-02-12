@@ -1,18 +1,25 @@
 'use client';
 
 import { Provider } from 'react-redux';
+import dynamic from 'next/dynamic'
 import store from '@/store/store';
-import Header from './Header';
-import Footer from './Footer';
+
+const DynamicHeader = dynamic(() => import('./Header'), {
+  ssr: false,
+})
+
+const DynamicFooter = dynamic(() => import('./Footer'), {
+  ssr: false,
+})
 
 export default function BodyWrapper({ children }: any) {
   return (
     <>
       <Provider store={store}>
         <div id="modal-wrapper"></div>
-        <Header />
+        <DynamicHeader />
         <main className="h-full">{children}</main>
-        <Footer />
+        <DynamicFooter />
       </Provider>
     </>
   );

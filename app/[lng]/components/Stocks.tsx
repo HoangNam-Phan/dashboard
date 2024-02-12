@@ -3,11 +3,8 @@
 import { useState, useEffect } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import {
-  popularStocksAndCrypto,
-  testChartData,
-  fetchStockData,
-} from '@/lib/stocks';
+import Loading from './modules/Loading';
+import { popularStocksAndCrypto, fetchStockData } from '@/lib/stocks';
 
 type StocksProps = {
   t: (key: string) => string;
@@ -20,7 +17,7 @@ export default function Stocks({ t }: StocksProps) {
   const [isLoading, setLoading] = useState(false);
   const [options, setOptions] = useState({});
 
-  /*   useEffect(() => {
+  useEffect(() => {
     const loadData = async () => {
       const data = await fetchStockData(displayedStock.identifier);
       const timeSeries = data['Time Series (60min)'];
@@ -34,25 +31,20 @@ export default function Stocks({ t }: StocksProps) {
 
       setOptions({
         title: {
-          text: `${displayedStock.name} price chart`,
+          text: `${displayedStock.name} ${t('stocks.chartTitle')}`,
         },
         xAxis: {
+          title: {
+            text: t('stocks.xAxisTitle'),
+          },
           categories: chartCategories.reverse(),
-
           labels: {
-            formatter: function (
-              this: Highcharts.AxisLabelsFormatterContextObject
-            ): string {
-              return Highcharts.dateFormat(
-                '%H:%M',
-                new Date(this.value).getTime()
-              );
-            },
+            enabled: false,
           },
         },
         yAxis: {
           title: {
-            text: 'Price (USD)',
+            text: `${t('stocks.yAxisTitle')} (USD)`,
           },
         },
         legend: {
@@ -71,17 +63,17 @@ export default function Stocks({ t }: StocksProps) {
     };
 
     loadData();
-  }, [displayedStock]); */
+  }, [displayedStock]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (
     <div className="h-full flex justify-around">
       <HighchartsReact
         highcharts={Highcharts}
-        options={testChartData}
+        options={options}
         containerProps={{ style: { width: '100%', height: '100%' } }}
       />
       <div className="flex flex-col pb-5">
@@ -91,6 +83,7 @@ export default function Stocks({ t }: StocksProps) {
             {popularStocksAndCrypto.map((stock, index) => {
               return (
                 <button
+                  type="button"
                   className={`
                     text-sm md:text-md text-center block shadow-lg text-blue-700 border border-blue-500
                     rounded-lg text-left w-full p-1 sm:p-2 my-3 hover:bg-blue-500 hover:text-white
