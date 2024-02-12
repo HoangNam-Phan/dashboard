@@ -4,11 +4,7 @@ import { useState, useEffect } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import Loading from './modules/Loading';
-import {
-  popularStocksAndCrypto,
-  testChartData,
-  fetchStockData,
-} from '@/lib/stocks';
+import { popularStocksAndCrypto, fetchStockData } from '@/lib/stocks';
 
 type StocksProps = {
   t: (key: string) => string;
@@ -21,7 +17,7 @@ export default function Stocks({ t }: StocksProps) {
   const [isLoading, setLoading] = useState(false);
   const [options, setOptions] = useState({});
 
-   /*  useEffect(() => {
+  useEffect(() => {
     const loadData = async () => {
       const data = await fetchStockData(displayedStock.identifier);
       const timeSeries = data['Time Series (60min)'];
@@ -73,7 +69,7 @@ export default function Stocks({ t }: StocksProps) {
 
     loadData();
   }, [displayedStock]);
- */
+
   if (isLoading) {
     return <Loading />;
   }
@@ -82,7 +78,7 @@ export default function Stocks({ t }: StocksProps) {
     <div className="h-full flex justify-around">
       <HighchartsReact
         highcharts={Highcharts}
-        options={testChartData}
+        options={options}
         containerProps={{ style: { width: '100%', height: '100%' } }}
       />
       <div className="flex flex-col pb-5">

@@ -8,7 +8,7 @@ import { useTranslation } from '@/app/i18n/client';
 import { LanguageParams } from '@/lib/types';
 import { UserErrorMessage } from '@/lib/types';
 import { useSelector } from 'react-redux';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { setIsLoggedIn } from '@/store/reducers/login';
 import { RootState } from '@/store/store';
 import { useDispatch } from 'react-redux';
@@ -20,13 +20,14 @@ export default function Login({ params: { lng } }: LanguageParams) {
   const lang = useSelector((state: RootState) => state.language.lang);
   const dispatch = useDispatch();
   const { t } = useTranslation(lng);
+  const router = useRouter();
 
   async function loginAndSetToken(prevState: FormStatus, formData: FormData) {
     const login = await loginUser(prevState, formData);
     if (login?.token) {
       Cookies.set('token', login.token, { expires: 30 })
       dispatch(setIsLoggedIn(true));
-      redirect(`/${lang}/dashboard`);
+      router.push(`/${lang}/dashboard`);
     }
 
     return login;

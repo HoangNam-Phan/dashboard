@@ -7,7 +7,7 @@ import { setIsLoggedIn } from '@/store/reducers/login';
 import { setLanguage } from '@/store/reducers/language';
 import { ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/outline';
 import { useSelector } from 'react-redux';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Modal from '../modules/Modal';
 import Cookies from 'js-cookie';
@@ -18,6 +18,7 @@ export default function Header() {
   const translationLang = Cookies.get('i18next');
   const { t } = useTranslation(translationLang);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   function toggleLanguage(lang: string) {
     dispatch(setLanguage(lang));
@@ -27,7 +28,7 @@ export default function Header() {
     Cookies.remove('token');
     dispatch(setIsLoggedIn(false));
     dispatch(closeModal('signOut'));
-    redirect(`/${lang}`);
+    router.push(`/${lang}`);
   }
 
   return (
@@ -44,8 +45,8 @@ export default function Header() {
           </button>
         ) : null}
         <Modal id="signOut">
-          <div className="flex flex-col relative m-5 space-y-2">
-            <p className="text-lg mb-3">{t('signOut.text')}</p>
+          <div className="flex flex-col relative space-y-2">
+            <p className="text-lg my-3">{t('signOut.text')}</p>
             <button
               type="button"
               className="w-24 self-end px-2 py-1 text-white bg-blue-500 rounded-lg hover:bg-blue-700"
@@ -64,4 +65,4 @@ export default function Header() {
       </nav>
     </header>
   );
-};
+}
