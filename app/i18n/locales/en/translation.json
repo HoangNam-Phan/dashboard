@@ -47,7 +47,10 @@
   },
 
   "stocks": {
-    "trending": "Trending"
+    "chartTitle": "price chart",
+    "trending": "Trending",
+    "xAxisTitle": "Time",
+    "yAxisTitle": "Price"
   },
 
   "news": {

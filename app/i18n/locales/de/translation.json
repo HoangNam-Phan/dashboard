@@ -46,7 +46,10 @@
   },
 
   "stocks": {
-    "trending": "Im Trend"
+    "chartTitle": "Preishistorie",
+    "trending": "Im Trend",
+    "xAxisTitle": "Zeit",
+    "yAxisTitle": "Preis"
   },
 
   "news": {

@@ -31,9 +31,12 @@ export default function Stocks({ t }: StocksProps) {
 
       setOptions({
         title: {
-          text: `${displayedStock.name} price chart`,
+          text: `${displayedStock.name} ${t('stocks.chartTitle')}`,
         },
         xAxis: {
+          title: {
+            text: t('stocks.xAxisTitle'),
+          },
           categories: chartCategories.reverse(),
           labels: {
             enabled: false,
@@ -41,7 +44,7 @@ export default function Stocks({ t }: StocksProps) {
         },
         yAxis: {
           title: {
-            text: 'Price (USD)',
+            text: `${t('stocks.yAxisTitle')} (USD)`,
           },
         },
         legend: {
