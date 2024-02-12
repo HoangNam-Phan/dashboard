@@ -37,7 +37,10 @@ export default function Footer() {
           <Link href={`/${lang}`} className={navLinkStyles}>
             <HomeIcon className="size-6" />
           </Link>
-          <Link href={`/${lang}/dashboard`} className={navLinkStyles}>
+          <Link
+            href={`/${lang}/dashboard`}
+            className={loggedIn ? navLinkStyles : disabledNavLinkStyles}
+          >
             <TableCellsIcon className="size-6" />
           </Link>
           <Link href="#" className={`${navLinkStyles} rounded-r-full`}>

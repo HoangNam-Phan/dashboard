@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import type { NewsResponse } from '@/lib/types';
+import Loading from './modules/Loading';
 
 type NewsProps = {
   t: (key: string) => string;
@@ -32,7 +33,7 @@ export default function News({ t }: NewsProps) {
     <div className="h-full flex flex-col">
       <h2 className="text-2xl font-bold mb-2 lg:mb-5">{t('news.title')}</h2>
       {isLoading ? (
-        <div>Loading...</div>
+        <Loading />
       ) : (
         <ol className="h-full overflow-y-auto space-y-5 lg:pr-3">
           {news?.articles.map((article) => {

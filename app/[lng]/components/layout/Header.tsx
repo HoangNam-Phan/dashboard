@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from '@/app/i18n/client';
 import { openModal, closeModal } from '@/store/reducers/modal';
 import { RootState } from '@/store/store';
 import { useDispatch } from 'react-redux';
@@ -6,12 +7,16 @@ import { setIsLoggedIn } from '@/store/reducers/login';
 import { setLanguage } from '@/store/reducers/language';
 import { ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/outline';
 import { useSelector } from 'react-redux';
+import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import Modal from '../modules/Modal';
 import Cookies from 'js-cookie';
 
-const LanguageToggler = () => {
+export default function Header() {
   const loggedIn = useSelector((state: RootState) => state.login.loggedIn);
+  const lang = useSelector((state: RootState) => state.language.lang);
+  const translationLang = Cookies.get('i18next');
+  const { t } = useTranslation(translationLang);
   const dispatch = useDispatch();
 
   function toggleLanguage(lang: string) {
@@ -22,6 +27,7 @@ const LanguageToggler = () => {
     Cookies.remove('token');
     dispatch(setIsLoggedIn(false));
     dispatch(closeModal('signOut'));
+    redirect(`/${lang}`);
   }
 
   return (
@@ -39,13 +45,13 @@ const LanguageToggler = () => {
         ) : null}
         <Modal id="signOut">
           <div className="flex flex-col relative m-5 space-y-2">
-            <p className="text-lg mb-3">Are you sure you want to sign out?</p>
+            <p className="text-lg mb-3">{t('signOut.text')}</p>
             <button
               type="button"
               className="w-24 self-end px-2 py-1 text-white bg-blue-500 rounded-lg hover:bg-blue-700"
               onClick={signOut}
             >
-              Sign out
+              {t('signOut.cta')}
             </button>
           </div>
         </Modal>
@@ -59,5 +65,3 @@ const LanguageToggler = () => {
     </header>
   );
 };
-
-export default LanguageToggler;

@@ -10,6 +10,7 @@ import { Todo } from './Todo';
 import TodoForm from '../forms/TodoForm';
 import { mutateTodo } from '@/lib/utils/todoActions';
 import { PlusIcon } from '@heroicons/react/24/outline';
+import Loading from '../modules/Loading';
 
 type TodosProps = {
   t: (key: string) => string;
@@ -86,7 +87,7 @@ export default function Todos({ t }: TodosProps) {
       <div className="h-full flex flex-col relative">
         <h2 className="text-2xl font-bold mb-2 lg:mb-5">{t('todos.title')}</h2>
         {isLoading ? (
-          <div>Loading...</div>
+          <Loading />
         ) : (
           <div className="h-5/6 lg:pr-3 overflow-y-auto">
             <ol>

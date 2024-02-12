@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import Loading from './modules/Loading';
 import {
   popularStocksAndCrypto,
   testChartData,
@@ -20,7 +21,7 @@ export default function Stocks({ t }: StocksProps) {
   const [isLoading, setLoading] = useState(false);
   const [options, setOptions] = useState({});
 
-  /*   useEffect(() => {
+   /*  useEffect(() => {
     const loadData = async () => {
       const data = await fetchStockData(displayedStock.identifier);
       const timeSeries = data['Time Series (60min)'];
@@ -71,10 +72,10 @@ export default function Stocks({ t }: StocksProps) {
     };
 
     loadData();
-  }, [displayedStock]); */
-
+  }, [displayedStock]);
+ */
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (

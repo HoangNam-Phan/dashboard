@@ -19,6 +19,11 @@
 
   },
 
+  "signOut": {
+    "text": "Are you sure you want to sign out?",
+    "cta": "Sign out"
+  },
+
   "passwordTooltip": {
     "title": "Password must have:",
     "req1": "- at least 8 characters",

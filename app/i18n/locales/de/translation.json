@@ -18,6 +18,11 @@
     "success": "Registrierung erfolgreich! Weiterleitung zur Login Seite..."
   },
 
+  "signOut": {
+    "text": "Sind Sie sicher, dass Sie sich abmelden wollen?",
+    "cta": "Abmelden"
+  },
+
   "passwordTooltip": {
     "title": "Das Password muss mind. :",
     "req1": "- 8 Zeichen lang sein",
