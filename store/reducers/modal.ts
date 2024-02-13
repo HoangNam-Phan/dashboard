@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-type ModalState = {
+export type ModalState = {
   modals: { [id: string]: boolean };
 };
 

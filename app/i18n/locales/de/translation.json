@@ -49,7 +49,8 @@
     "chartTitle": "Preishistorie",
     "trending": "Im Trend",
     "xAxisTitle": "Zeit",
-    "yAxisTitle": "Preis"
+    "yAxisTitle": "Preis",
+    "apiLimitReached": "Der Aktien API hat das tägliche Limit erreich! Es können keine Daten mehr angezeigt werden, bitte veruschen sie es am nächsten Tag erneut."
   },
 
   "news": {
@@ -62,7 +63,7 @@
     "dueDate": "Bis zum: ",
     "form": {
       "deleteWarning": "Bist du dir sicher, dass du diesen Eintrag löschen möchtest?",
-      "delete": "Todo",
+      "delete": "Löschen",
       "content": "Todo Text: ",
       "deadline": "Deadline: ",
       "add": "Hinzufügen",

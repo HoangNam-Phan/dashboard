@@ -4,7 +4,12 @@ import { useState, useEffect } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import Loading from './modules/Loading';
-import { popularStocksAndCrypto, fetchStockData } from '@/lib/stocks';
+import {
+  ChartOptions,
+  initialChartOptions,
+  popularStocksAndCrypto,
+  fetchStockData,
+} from '@/lib/stocks';
 
 type StocksProps = {
   t: (key: string) => string;
@@ -15,7 +20,7 @@ export default function Stocks({ t }: StocksProps) {
     popularStocksAndCrypto[0]
   );
   const [isLoading, setLoading] = useState(false);
-  const [options, setOptions] = useState({});
+  const [options, setOptions] = useState<ChartOptions>(initialChartOptions);
 
   useEffect(() => {
     const loadData = async () => {
@@ -71,13 +76,21 @@ export default function Stocks({ t }: StocksProps) {
 
   return (
     <div className="h-full flex justify-around">
-      <HighchartsReact
-        highcharts={Highcharts}
-        options={options}
-        containerProps={{ style: { width: '100%', height: '100%' } }}
-      />
-      <div className="flex flex-col pb-5">
-        <h2 className="text-xl mb-3">{t('stocks.trending')}</h2>
+      {options?.series?.[0]?.data?.length > 0 ? (
+        <HighchartsReact
+          highcharts={Highcharts}
+          options={options}
+          containerProps={{ style: { width: '100%', height: '100%' } }}
+        />
+      ) : (
+        <div className="size-full flex items-center">
+          <p>
+            {t('stocks.apiLimitReached')}
+          </p>
+        </div>
+      )}
+      <div className="flex flex-col pb-5 pl-2">
+        <h2 className="text-xl mb-3 ml-2">{t('stocks.trending')}</h2>
         <div className="flex flex-col overflow-y-auto">
           <ol className="mr-5 ml-2">
             {popularStocksAndCrypto.map((stock, index) => {
@@ -86,7 +99,7 @@ export default function Stocks({ t }: StocksProps) {
                   type="button"
                   className={`
                     text-sm md:text-md text-center block shadow-lg text-blue-700 border border-blue-500
-                    rounded-lg text-left w-full p-1 sm:p-2 my-3 hover:bg-blue-500 hover:text-white
+                    rounded-lg text-left w-full p-1 sm:p-2 my-3 hover:bg-blue-500 hover:text-white transition duration-300
                     ${
                       stock === displayedStock
                         ? 'disabled:bg-blue-500 text-white'

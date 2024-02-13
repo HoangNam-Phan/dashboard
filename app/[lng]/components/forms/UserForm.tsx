@@ -1,6 +1,7 @@
 import React from 'react';
 import type { UserErrorMessage } from '@/lib/types';
 import { InformationCircleIcon } from '@heroicons/react/24/outline';
+import { motion } from 'framer-motion';
 
 type UserFormProps = {
   title: string;
@@ -22,11 +23,15 @@ export default function UserForm({
   const labelClasses = 'block font-medium text-gray-900';
   const labelWrapperClasses = 'flex items-center justify-between';
   const inputClasses = `block w-full mt-2 px-3 py-2 border-2 rounded-md focus:outline-none 
-    focus:ring-2 focus:border-blue-500 hover:ring-1 hover:border-blue-200`;
+    focus:ring-2 focus:border-blue-500 hover:ring-1 hover:border-blue-200 transition duration-100`;
   const errorMessageClass = 'text-red-500 font-semibold';
   return (
     <>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <motion.div
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8"
+      >
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="text-center text-2xl font-bold text-gray-900">
             {t(title)}
@@ -108,7 +113,7 @@ export default function UserForm({
             </div>
           </form>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 }

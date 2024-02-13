@@ -17,7 +17,7 @@ export default function TodoForm({
   t,
 }: TodoFormProps) {
   const inputClasses = `mt-2 px-3 py-2 border-2 rounded-md focus:outline-none 
-    focus:ring-2 focus:border-blue-500 hover:ring-1 hover:border-blue-200`;
+    focus:ring-2 focus:border-blue-500 hover:ring-1 hover:border-blue-200 transition duration-100`;
   const ctaClasses = `self-end shadow-lg border rounded-lg px-2 py-1 my-3`;
 
   return (
@@ -63,7 +63,7 @@ export default function TodoForm({
           )}
           <button
             className={`text-blue-700 border-blue-500 hover:bg-blue-500
-              hover:text-white ${ctaClasses}`}
+              hover:text-white transition duration-300 ${ctaClasses}`}
             type="submit"
           >
             {actionType === 'POST' ? t('todos.form.add') : t('todos.form.save')}{' '}

@@ -15,7 +15,7 @@ export default function Footer() {
   const lang = useSelector((state: RootState) => state.language.lang);
   const loggedIn = useSelector((state: RootState) => state.login.loggedIn);
   const navLinkStyles =
-    'py-1 lg:py-2 px-3 bg-white hover:bg-blue-500 hover:text-white';
+    'py-1 lg:py-2 px-3 transition bg-white hover:bg-blue-500 hover:text-white duration-300';
   const disabledNavLinkStyles = 'py-1 lg:py-2 px-3 text-gray-300 bg-white';
   const conditionalNavClasses = loggedIn
     ? disabledNavLinkStyles

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import type { NewsResponse } from '@/lib/types';
 import Loading from './modules/Loading';
+import { motion } from 'framer-motion';
 
 type NewsProps = {
   t: (key: string) => string;
@@ -35,7 +36,10 @@ export default function News({ t }: NewsProps) {
       {isLoading ? (
         <Loading />
       ) : (
-        <ol className="h-full overflow-y-auto space-y-5 lg:pr-3">
+        <motion.ul
+          variants={{ visible: { transition: { staggerChildren: 0.5 } } }}
+          className="h-full overflow-y-auto space-y-5 lg:pr-3"
+        >
           {news?.articles.map((article) => {
             if (
               article.title === '[Removed]' ||
@@ -44,8 +48,13 @@ export default function News({ t }: NewsProps) {
               return null;
             } else {
               return (
-                <div
-                  className="flex flex-col bg-white rounded-lg shadow-lg p-3"
+                <motion.li
+                  variants={{
+                    hidden: { opacity: 0, y: 30 },
+                    visible: { opacity: 1, y: 0 },
+                  }}
+                  transition={{ duration: 0.5 }}
+                  className="bg-slate-200 flex flex-col bg-white rounded-lg shadow-lg p-3"
                   key={`${article.author}-${article.publishedAt}`}
                 >
                   {article.urlToImage ? (
@@ -75,11 +84,11 @@ export default function News({ t }: NewsProps) {
                   >
                     {t('news.readMore')}
                   </a>
-                </div>
+                </motion.li>
               );
             }
           })}
-        </ol>
+        </motion.ul>
       )}
     </div>
   );
