@@ -25,6 +25,8 @@ export default function UserForm({
   const inputClasses = `text-gray-900 block w-full mt-2 px-3 py-2 border-2 rounded-md focus:outline-none 
     focus:ring-2 focus:border-blue-500 hover:ring-1 hover:border-blue-200 transition duration-100`;
   const errorMessageClass = 'text-red-500 font-semibold';
+  const inputErrorAnimation = [-5, 0, 5, 0, -5, 0, 5, 0, -5, 0, 5, 0];
+
   return (
     <>
       <motion.div
@@ -50,16 +52,24 @@ export default function UserForm({
                   </p>
                 )}
               </div>
-              <div className="mt-2">
+              <motion.div
+                animate={{
+                  x: error?.message?.userName ? inputErrorAnimation : 0,
+                }}
+                transition={{ duration: 0.2 }}
+                className="mt-2"
+              >
                 <input
                   id="userName"
                   name="userName"
                   type="userName"
                   autoComplete="userName"
                   required
-                  className={inputClasses}
+                  className={`${inputClasses} ${
+                    error?.message?.userName ? 'border-red-500' : ''
+                  }`}
                 />
-              </div>
+              </motion.div>
             </div>
             <div>
               <div className={labelWrapperClasses}>
@@ -72,14 +82,22 @@ export default function UserForm({
                   </p>
                 )}
               </div>
-              <div className="mt-2 relative">
+              <motion.div
+                animate={{
+                  x: error?.message?.password ? inputErrorAnimation : 0,
+                }}
+                transition={{ duration: 0.2 }}
+                className="mt-2 relative"
+              >
                 <input
                   id="password"
                   name="password"
                   type="password"
                   autoComplete="current-password"
                   required
-                  className={inputClasses}
+                  className={`${inputClasses} ${
+                    error?.message?.password ? 'border-red-500' : ''
+                  }`}
                 />
                 {submitText === 'register.cta' ? (
                   <div className="text-gray-900 absolute right-3 top-3 group">
@@ -94,7 +112,7 @@ export default function UserForm({
                     </div>
                   </div>
                 ) : null}
-              </div>
+              </motion.div>
             </div>
             <div>
               <button
@@ -105,9 +123,13 @@ export default function UserForm({
               </button>
               {success ? (
                 <div className="absolute my-10 left-1/2 -translate-x-1/2">
-                  <p className="text-lg text-green-600 font-semibold">
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-lg text-green-600 font-semibold"
+                  >
                     {t('register.success')}
-                  </p>
+                  </motion.p>
                 </div>
               ) : null}
             </div>
