@@ -59,7 +59,7 @@
   },
 
   "todos": {
-    "title": "Todo Liste",
+    "title": "Todo list",
     "dueDate": "Due to: ",
     "form": {
       "deleteWarning": "Are you sure you want to delete this entry?",

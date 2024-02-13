@@ -18,7 +18,7 @@ export default function Card({
       initial="hidden"
       animate="visible"
       variants={customVariants}
-      className={`bg-white shadow-2xl shadow-inner rounded-lg p-5 ${customClasses}`}
+      className={`bg-white dark:bg-gray-600 shadow-2xl shadow-inner rounded-lg p-5 ${customClasses}`}
     >
       {children}
     </motion.div>

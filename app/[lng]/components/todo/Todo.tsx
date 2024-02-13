@@ -19,7 +19,7 @@ export function Todo({ todo, onEdit, onDelete, t }: TodoProps) {
 
   return (
     <motion.li
-      className="bg-slate-200 mb-5 p-3 rounded-lg shadow-lg"
+      className="bg-slate-200 dark:bg-gray-400 text-gray-900 mb-5 p-3 rounded-lg shadow-lg"
       variants={{
         hidden: { opacity: 0, y: 10 },
         visible: { opacity: 1, y: 0 },

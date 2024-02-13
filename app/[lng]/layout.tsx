@@ -26,7 +26,7 @@ export default function RootLayout({
 }: Readonly<RootParams>) {
   return (
     <html lang={lng} dir={dir(lng)}>
-      <body className="h-screen bg-slate-300 overflow-hidden">
+      <body className="h-screen overflow-hidden">
         <BodyWrapper>{children}</BodyWrapper>
       </body>
     </html>

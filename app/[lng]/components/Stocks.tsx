@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import Loading from './modules/Loading';
+import { RootState } from '@/store/store';
+import { useSelector } from 'react-redux';
 import {
   ChartOptions,
   initialChartOptions,
@@ -21,6 +23,7 @@ export default function Stocks({ t }: StocksProps) {
   );
   const [isLoading, setLoading] = useState(false);
   const [options, setOptions] = useState<ChartOptions>(initialChartOptions);
+  const darkmode = useSelector((state: RootState) => state.darkmode.darkmode);
 
   useEffect(() => {
     const loadData = async () => {
@@ -35,6 +38,9 @@ export default function Stocks({ t }: StocksProps) {
       }
 
       setOptions({
+        chart: {
+          backgroundColor: darkmode ? '#cbd5e0' : '',
+        },
         title: {
           text: `${displayedStock.name} ${t('stocks.chartTitle')}`,
         },
@@ -84,9 +90,7 @@ export default function Stocks({ t }: StocksProps) {
         />
       ) : (
         <div className="size-full flex items-center">
-          <p>
-            {t('stocks.apiLimitReached')}
-          </p>
+          <p>{t('stocks.apiLimitReached')}</p>
         </div>
       )}
       <div className="flex flex-col pb-5 pl-2">
@@ -98,7 +102,7 @@ export default function Stocks({ t }: StocksProps) {
                 <button
                   type="button"
                   className={`
-                    text-sm md:text-md text-center block shadow-lg text-blue-700 border border-blue-500
+                    text-sm md:text-md text-center block shadow-lg text-blue-700 border border-blue-500 dark:border-gray-200 dark:text-gray-200
                     rounded-lg text-left w-full p-1 sm:p-2 my-3 hover:bg-blue-500 hover:text-white transition duration-300
                     ${
                       stock === displayedStock

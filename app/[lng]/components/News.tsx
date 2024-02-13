@@ -54,7 +54,7 @@ export default function News({ t }: NewsProps) {
                     visible: { opacity: 1, y: 0 },
                   }}
                   transition={{ duration: 0.5 }}
-                  className="bg-slate-200 flex flex-col bg-white rounded-lg shadow-lg p-3"
+                  className="bg-slate-200 dark:bg-gray-400 text-gray-900 flex flex-col bg-white rounded-lg shadow-lg p-3"
                   key={`${article.author}-${article.publishedAt}`}
                 >
                   {article.urlToImage ? (

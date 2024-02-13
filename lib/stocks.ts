@@ -1,4 +1,7 @@
 export type ChartOptions = {
+  chart: {
+    backgroundColor: string;
+  };
   title: {
     text: string;
   };
@@ -28,12 +31,15 @@ export type ChartOptions = {
 };
 
 export const initialChartOptions = {
+  chart: {
+    backgroundColor: '',
+  },
   title: {
-    text: "",
+    text: '',
   },
   xAxis: {
     title: {
-      text: "",
+      text: '',
     },
     categories: [],
     labels: {
@@ -42,7 +48,7 @@ export const initialChartOptions = {
   },
   yAxis: {
     title: {
-      text: "",
+      text: '',
     },
   },
   legend: {
@@ -52,7 +58,7 @@ export const initialChartOptions = {
     enabled: false,
   },
   series: [],
-}
+};
 
 export const popularStocksAndCrypto = [
   { name: 'Apple', identifier: 'AAPL' },

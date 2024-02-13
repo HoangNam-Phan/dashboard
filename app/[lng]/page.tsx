@@ -6,9 +6,7 @@ import { motion } from 'framer-motion';
 
 export default function Home({ params: { lng } }: LanguageParams) {
   const { t } = useTranslation(lng);
-  const ctaClasses =
-    'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 my-5 mx-2 rounded';
-
+  
   return (
     <div className="flex flex-col items-center justify-center h-full">
       <motion.h1

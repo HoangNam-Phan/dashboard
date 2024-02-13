@@ -25,18 +25,19 @@ export default function ModalComponent({ id, children }: ModalProps) {
     ? createPortal(
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
           <motion.div
-            className="bg-white rounded-lg p-6 relative"
+            className="bg-white dark:bg-gray-400 rounded-lg p-6 relative"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 30 }}
           >
-            <button
+            <motion.button
+              whileHover={{ scale: 1.3 }}
               type="button"
               className="absolute top-0 right-0 size-8 pt-3 cursor-pointer"
               onClick={handleCloseModal}
             >
               <XMarkIcon className="size-5" />
-            </button>
+            </motion.button>
             <div>{children}</div>
           </motion.div>
         </div>,

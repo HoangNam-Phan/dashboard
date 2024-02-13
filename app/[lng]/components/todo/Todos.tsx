@@ -104,13 +104,14 @@ export default function Todos({ t }: TodosProps) {
                 />
               ))}
             </motion.ol>
-            <button
+            <motion.button
               type="button"
+              whileHover={{ scale: 1.5 }}
               className="absolute bottom-0 right-0"
               onClick={handleAddClick}
             >
               <PlusIcon className="size-7" />
-            </button>
+            </motion.button>
           </div>
         )}
       </div>

@@ -37,7 +37,7 @@ export default function Header() {
   }
 
   return (
-    <header className="absolute top-0 right-0 p-3 w-full flex justify-end">
+    <header className="absolute top-0 right-0 p-3 w-full flex justify-end text-gray-500">
       <nav className="flex space-x-5">
         {loggedIn ? (
           <motion.button
