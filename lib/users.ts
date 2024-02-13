@@ -19,12 +19,6 @@ function getPasswordMatch(password: string | Buffer, storedPassword: string) {
   return bcrypt.compareSync(password, storedPassword);
 }
 
-//to be deleted, just for testing purposes
-export default function logAllUsers() {
-  const logins = db.prepare('SELECT * FROM logins').all();
-  console.log(logins);
-}
-
 function findUserToken(user: User) {
   const storedUser = getStoredUser(user.userName);
   const passwordMatch = getPasswordMatch(user.password, storedUser.password);

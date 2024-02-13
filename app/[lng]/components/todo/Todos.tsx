@@ -11,6 +11,7 @@ import TodoForm from '../forms/TodoForm';
 import { mutateTodo } from '@/lib/utils/todoActions';
 import { PlusIcon } from '@heroicons/react/24/outline';
 import Loading from '../modules/Loading';
+import { motion } from 'framer-motion';
 
 type TodosProps = {
   t: (key: string) => string;
@@ -90,7 +91,9 @@ export default function Todos({ t }: TodosProps) {
           <Loading />
         ) : (
           <div className="h-5/6 lg:pr-3 overflow-y-auto">
-            <ol>
+            <motion.ol
+              variants={{ visible: { transition: { staggerChildren: 0.3 } } }}
+            >
               {todoData?.map((todo) => (
                 <Todo
                   t={t}
@@ -100,14 +103,15 @@ export default function Todos({ t }: TodosProps) {
                   onDelete={() => handleDeleteClick(todo)}
                 />
               ))}
-            </ol>
-            <button
+            </motion.ol>
+            <motion.button
               type="button"
+              whileHover={{ scale: 1.5 }}
               className="absolute bottom-0 right-0"
               onClick={handleAddClick}
             >
               <PlusIcon className="size-7" />
-            </button>
+            </motion.button>
           </div>
         )}
       </div>

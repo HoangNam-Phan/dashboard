@@ -23,22 +23,20 @@ function navigationGuard(req: NextRequest, lang: string | undefined | null) {
   const path = req.nextUrl.pathname;
   const authToken = req.cookies.get('token')?.value;
 
-  if (authToken !== '1') {
+  if (
+    (!authToken && path === '/de/dashboard') ||
+    (!authToken && path === '/en/dashboard')
+  ) {
+    return NextResponse.redirect(new URL(`/${lang}/login`, req.url));
+  }
+  if (authToken) {
     if (
-      (!authToken && path === '/de/dashboard') ||
-      (!authToken && path === '/en/dashboard')
+      path === '/de/login' ||
+      path === '/de/signup' ||
+      path === '/en/login' ||
+      path === '/en/signup'
     ) {
-      return NextResponse.redirect(new URL(`/${lang}/login`, req.url));
-    }
-    if (authToken) {
-      if (
-        path === '/de/login' ||
-        path === '/de/signup' ||
-        path === '/en/login' ||
-        path === '/en/signup'
-      ) {
-        return NextResponse.redirect(new URL(`/${lang}/dashboard`, req.url));
-      }
+      return NextResponse.redirect(new URL(`/${lang}/dashboard`, req.url));
     }
   }
 }

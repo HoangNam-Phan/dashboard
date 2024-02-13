@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { getImagesByCodes } from '@/lib/utils/weather';
 import { WeatherData } from '@/lib/utils/weather';
 import Loading from './modules/Loading';
+import Clock from './Clock';
+import { motion } from 'framer-motion';
 
 const weekdays = [
   'sunday',
@@ -28,6 +30,11 @@ function currentWeekDayShort(weekday: string) {
 
 type WeatherProps = {
   t: (key: string) => string;
+};
+
+const weatherVariant = {
+  hidden: { opacity: 0, scale: 0.5 },
+  visible: { opacity: 1, scale: 1 },
 };
 
 export default function Weather({ t }: WeatherProps) {
@@ -58,23 +65,26 @@ export default function Weather({ t }: WeatherProps) {
     return (
       <div className="h-full flex flex-col justify-evenly divide-y-2">
         <div className="flex p-3 2xl:p-7 space-x-5">
-          <img
+          <motion.img
+            variants={weatherVariant}
+            transition={{ type: 'spring' }}
             src={imgSrcs[0]}
             width="170px"
             height="170px"
             className="size-20 lg:size-36"
           />
-          <div className="text-lg xl:text-2xl flex w-full justify-between space-x-2">
+          <div className="flex w-full justify-between space-x-2">
             <div className="flex flex-col space-y-2">
-              <span className="text-3xl 2xl:text-right">
+              <span className="ml-1 text-xl md:text-2xl lg:text-3xl 2xl:text-right">
                 {`${weatherData.current_weather.temperature}
                   ${weatherData.current_weather_units.temperature}`}
               </span>
-              <span className="ml-1">
+              <span className="text-md md:text-lg xl:text-2xl ml-1">
                 {`Wind: ${weatherData.current_weather.windspeed}${weatherData.current_weather_units.windspeed}`}
               </span>
             </div>
             <div className="flex flex-col text-right">
+              <Clock />
               <span className="font-semibold text-xl 2xl:text-3xl">
                 {t(`weather.${[currentWeekDay(weatherData.daily.time[0])]}`)}
               </span>
@@ -83,10 +93,15 @@ export default function Weather({ t }: WeatherProps) {
             </div>
           </div>
         </div>
-        <div className="flex justify-evenly space-x-5 pt-2 sm:pt-5">
+        <motion.div
+          variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+          className="flex justify-evenly space-x-5 pt-2 sm:pt-5"
+        >
           {imgSrcs.map((img, index) => {
             return (
-              <div
+              <motion.div
+                variants={weatherVariant}
+                transition={{ type: 'spring' }}
                 key={`${img}-${index}`}
                 className="text-sm flex flex-col items-center space-y-1"
               >
@@ -96,7 +111,7 @@ export default function Weather({ t }: WeatherProps) {
                   height="50px"
                   className="size-8 xl:size-12 2xl:size-14"
                 />
-                <div className="text-sm md text-center flex flex-col">
+                <div className="text-xs md:text-sm md text-center flex flex-col">
                   <div>
                     <span>
                       {weatherData.daily.temperature_2m_min[index]}°/{' '}
@@ -115,10 +130,10 @@ export default function Weather({ t }: WeatherProps) {
                     )}
                   </span>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     );
   }
