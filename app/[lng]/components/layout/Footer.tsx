@@ -6,6 +6,8 @@ import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 import { useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
+import { MouseEvent } from 'react';
 import {
   ArrowRightEndOnRectangleIcon,
   HomeIcon,
@@ -21,6 +23,7 @@ export default function Footer() {
   const loggedIn = useSelector((state: RootState) => state.login.loggedIn);
   const darkmode = useSelector((state: RootState) => state.darkmode.darkmode);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const navLinkStyles =
     'py-1 lg:py-2 px-3 transition bg-white hover:bg-blue-500 hover:text-white duration-300';
@@ -39,6 +42,20 @@ export default function Footer() {
     return dispatch(setDarkmode(true));
   }
 
+  function handleLinkClick(
+    e: MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>,
+    path: string,
+    enabledWhenLoggedIn: boolean
+  ) {
+    if (loggedIn && enabledWhenLoggedIn) {
+      return router.push(path);
+    } else if (!loggedIn && !enabledWhenLoggedIn) {
+      return router.push(path);
+    }
+
+    return e.preventDefault();
+  }
+
   return (
     <footer className="fixed bottom-0 pb-3 w-full">
       <nav>
@@ -46,15 +63,21 @@ export default function Footer() {
           <Link
             href={`/${lang}/login`}
             className={`${conditionalNavClasses} rounded-l-full`}
+            onClick={(e) => handleLinkClick(e, `/${lang}/login`, false)}
           >
             <ArrowRightEndOnRectangleIcon className="size-6" />
           </Link>
-          <Link href={`/${lang}/signup`} className={conditionalNavClasses}>
+          <Link
+            href={`/${lang}/signup`}
+            className={conditionalNavClasses}
+            onClick={(e) => handleLinkClick(e, `/${lang}/signup`, false)}
+          >
             <UserPlusIcon className="size-6" />
           </Link>
           <Link
             href={`/${lang}/dashboard`}
             className={loggedIn ? navLinkStyles : disabledNavLinkStyles}
+            onClick={(e) => handleLinkClick(e, `/${lang}/dashboard`, true)}
           >
             <TableCellsIcon className="size-6" />
           </Link>
