@@ -1,7 +1,8 @@
 {
   "homepage": {
     "title": "Willkommen zu - board!",
-    "subtitle": "Um dieses Tool nutzen zu können, erstellen Sie sich bitte einen Account und loggen Sie sich ein. Keine Sorge, es ist keine E-Mail notwendig :)"
+    "subtitle": "- eine Anwendung, die aktuelle Web-Technologien und Fähigkeiten präsentiert, die ich im Laufe meiner Karriere gelernt habe. Entwickelt mit Next.js, React und erweitert durch TypeScript und Tailwind CSS, bietet es eine Live-Wettervorhersage, einen Aktien Tracker mit Visualisierungen von Highcharts, einen News-Feed und eine Todo-Liste. Die Daten werden mit Better-SQLite3 zusammen mit Next.js API-Routen verwaltet und die Funktionalitäten der Anwendung werden durch Jest- und Cypress-Tests sichergestellt. Animationen werden mit Framer Motion durchgeführt und die Internationalisierung wird durch i18next unterstützt. Vielen Dank für Ihren Besuch!",
+    "infoText": "Für den Fall, dass Sie die Benutzerregistrierung und den Login-Prozess überspringen möchten, habe ich ein Testkonto vorbereitet. (username: 'username' & password: 'password') Bitte sehen Sie davon ab, persönliche Informationen als Benutzerdaten oder in der App zu verwenden, da dieses Projekt nur dazu dient, meine Fähigkeiten zu demonstrieren, und nicht dazu gedacht ist, privat genutzt zu werden."
   },
 
   "userName": "Benutzername",
