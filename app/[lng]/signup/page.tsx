@@ -34,7 +34,7 @@ export default function Signup({ params: { lng } }: LanguageParams) {
     setTimeout(() => {
       setRegisterSuccessful(false);
       router.push(`/${lang}/login`);
-    }, 3000);
+    }, 1000);
   }
 
   return (
