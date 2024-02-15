@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 import { useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { MouseEvent } from 'react';
 import {
   ArrowRightEndOnRectangleIcon,
@@ -24,6 +24,7 @@ export default function Footer() {
   const darkmode = useSelector((state: RootState) => state.darkmode.darkmode);
   const dispatch = useDispatch();
   const router = useRouter();
+  const pathname = usePathname();
 
   const navLinkStyles =
     'py-1 lg:py-2 px-3 transition bg-white hover:bg-blue-500 hover:text-white duration-300';
@@ -31,6 +32,9 @@ export default function Footer() {
   const conditionalNavClasses = loggedIn
     ? disabledNavLinkStyles
     : navLinkStyles;
+  const activeClass = (path: string) => {
+    return pathname === `/${lang}${path}` ? 'bg-blue-600 text-white' : '';
+  };
 
   function toggleDarkmode() {
     if (darkmode) {
@@ -47,10 +51,11 @@ export default function Footer() {
     path: string,
     enabledWhenLoggedIn: boolean
   ) {
-    if (loggedIn && enabledWhenLoggedIn) {
-      return router.push(path);
-    } else if (!loggedIn && !enabledWhenLoggedIn) {
-      return router.push(path);
+    if (
+      (loggedIn && enabledWhenLoggedIn) ||
+      (!loggedIn && !enabledWhenLoggedIn)
+    ) {
+      return router.push(`/${lang}${path}`);
     }
 
     return e.preventDefault();
@@ -62,26 +67,33 @@ export default function Footer() {
         <div className="flex justify-center divide-x-2">
           <Link
             href={`/${lang}/login`}
-            className={`${conditionalNavClasses} rounded-l-full`}
-            onClick={(e) => handleLinkClick(e, `/${lang}/login`, false)}
+            className={`${conditionalNavClasses} ${activeClass(
+              '/login'
+            )} rounded-l-full`}
+            onClick={(e) => handleLinkClick(e, '/login', false)}
           >
             <ArrowRightEndOnRectangleIcon className="size-6" />
           </Link>
           <Link
             href={`/${lang}/signup`}
-            className={conditionalNavClasses}
-            onClick={(e) => handleLinkClick(e, `/${lang}/signup`, false)}
+            className={`${conditionalNavClasses} ${activeClass('/signup')}`}
+            onClick={(e) => handleLinkClick(e, '/signup', false)}
           >
             <UserPlusIcon className="size-6" />
           </Link>
           <Link
             href={`/${lang}/dashboard`}
-            className={loggedIn ? navLinkStyles : disabledNavLinkStyles}
-            onClick={(e) => handleLinkClick(e, `/${lang}/dashboard`, true)}
+            className={`${
+              loggedIn ? navLinkStyles : disabledNavLinkStyles
+            } ${activeClass('/dashboard')}`}
+            onClick={(e) => handleLinkClick(e, '/dashboard', true)}
           >
             <TableCellsIcon className="size-6" />
           </Link>
-          <Link href={`/${lang}`} className={navLinkStyles}>
+          <Link
+            href={`/${lang}`}
+            className={`${navLinkStyles} ${activeClass('')}`}
+          >
             <HomeIcon className="size-6" />
           </Link>
           <motion.button

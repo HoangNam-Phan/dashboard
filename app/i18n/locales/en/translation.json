@@ -2,7 +2,7 @@
   "homepage": {
     "title": "Welcome to dashboard!",
     "subtitle": "- an application designed to showcase current web technologies and skills that i learned throughout my career. Developed with Next.js, React and enhanced by TypeScript and Tailwind CSS, it features a live Weather forecast, a Stock Tracker with visualizations powered by Highcharts, a News feed, and a Todo List. Data is managed using Better-SQLite3 alongside Next.js API routes and the application's functionalities are assured through Jest and Cypress testing. Animations are done with Framer Motion and internationalization support via i18next. Thank you for your visit!",
-    "infoText": "In case you want to skip the user registraition and login process, i prepared a test account. (username: 'username' & password: 'password') Please refrain from using personal information as userdata or in the app, as this projects intended purpose is just a showcase of my skills, and not intended for personal use."
+    "infoText": "In case you want to skip the user registraition and login process, i prepared a test account. (username: 'username' & password: 'Password123!') Please refrain from using personal information as userdata or in the app, as this projects intended purpose is solely to showcase my skills, and not intended for personal use."
   },
 
   "userName": "Username",
