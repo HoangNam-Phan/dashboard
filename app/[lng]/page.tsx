@@ -8,11 +8,11 @@ export default function Home({ params: { lng } }: LanguageParams) {
   const { t } = useTranslation(lng);
 
   return (
-    <div className="flex flex-col px-5 justify-center h-full space-y-5 md:space-y-12 lg:mx-40 xl:mx-80">
+    <div className="flex flex-col px-5 justify-center h-full space-y-5 md:space-y-12 lg:mx-40 xl:mx-60">
       <motion.h1
         initial={{ opacity: 0, x: -100 }}
         animate={{ opacity: 1, x: 0 }}
-        className="text-xl sm:text-3xl lg:text-5xl uppercase"
+        className="font-bold text-xl sm:text-3xl lg:text-5xl uppercase"
       >
         {t('homepage.title')}
       </motion.h1>
