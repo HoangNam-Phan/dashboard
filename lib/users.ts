@@ -1,80 +1,85 @@
-import sql from 'better-sqlite3';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { User, UserEntry } from './types';
 
-const db = sql('userdata.db');
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri =
+  'mongodb+srv://namphan:I6qnJueLp06NdwfA@dashboard.mvhe8u3.mongodb.net/?retryWrites=true&w=majority';
 
-function hashPassword(password: string | Buffer) {
-  return bcrypt.hashSync(password, 10);
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  },
+});
+
+async function hashPassword(password: string | Buffer) {
+  return bcrypt.hash(password, 10);
 }
 
-function getStoredUser(userName: string | Buffer) {
-  return db
-    .prepare('SELECT * FROM logins WHERE username = ?')
-    .get(userName) as UserEntry;
+async function getStoredUser(userName: string | Buffer) {
+  await client.connect();
+  const database = client.db('dashboard');
+  const logins = database.collection('logins');
+  return await logins.findOne({ userName });
 }
 
 function getPasswordMatch(password: string | Buffer, storedPassword: string) {
-  return bcrypt.compareSync(password, storedPassword);
+  return bcrypt.compare(password, storedPassword);
 }
 
-function findUserToken(user: User) {
-  const storedUser = getStoredUser(user.userName);
-  const passwordMatch = getPasswordMatch(user.password, storedUser.password);
-
-  if (passwordMatch) {
-    return storedUser.token;
-  } else {
-    return null;
+async function findUserToken(user: UserEntry) {
+  const storedUser = await getStoredUser(user.userName);
+  if (storedUser) {
+    const passwordMatch = await getPasswordMatch(
+      user.password,
+      storedUser.password
+    );
+    if (passwordMatch) {
+      return storedUser.token;
+    }
   }
+  return null;
 }
 
-export function isExistingUser(user: User) {
-  const existingUser = db
-    .prepare('SELECT * FROM logins WHERE username = ?')
-    .get(user.userName);
-
-  return existingUser;
+export async function isExistingUser(user: User) {
+  const existingUser = await getStoredUser(user.userName);
+  return existingUser != null;
 }
 
-export function saveUser(user: User) {
-  const hashedPassword = hashPassword(user.password);
+export async function saveUser(user: User) {
+  await client.connect();
+  const database = client.db('dashboard');
+  const logins = database.collection('logins');
+
+  const hashedPassword = await hashPassword(user.password);
   const token = jwt.sign({ username: user.userName }, 'top-secret-login-token');
 
-  db.prepare(
-    `
-    INSERT INTO logins
-      (username, password, token)
-    VALUES (
-      @userName,
-      @password,
-      @token
-    )
-  `
-  ).run({
+  const result = await logins.insertOne({
     userName: user.userName,
     password: hashedPassword,
     token,
   });
+
+  return result.insertedId;
 }
 
-export function isValidUser(user: User) {
-  if (user.userName === 'admin' && user.password === 'admin') {
-    return { success: true, token: 1 };
-  }
-
-  const storedUser: UserEntry = getStoredUser(user.userName);
+export async function isValidUser(user: User) {
+  const storedUser = await getStoredUser(user.userName);
   if (!storedUser) {
     return { success: false, message: { userName: 'User does not exist!' } };
   }
 
-  const passwordMatch = getPasswordMatch(user.password, storedUser.password);
+  const passwordMatch = await getPasswordMatch(
+    user.password,
+    storedUser.password
+  );
+  
   if (!passwordMatch) {
     return { success: false, message: { password: 'Incorrect password!' } };
   }
 
-  const token = findUserToken(user);
-
-  return { success: true, token };
+  const token = await findUserToken(user as UserEntry);
+  return token ? { success: true, token } : { success: false };
 }

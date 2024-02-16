@@ -24,11 +24,11 @@ type LanguageParams = {
 type FormTodo = {
   text: FormDataEntryValue | null;
   deadline: FormDataEntryValue | null;
-  id?: number | undefined;
+  _id?: number | undefined;
 };
 
 type TodoItem = {
-  id: number;
+  _id: number;
   text: string;
   deadline: string;
 };

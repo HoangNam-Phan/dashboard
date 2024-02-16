@@ -3,7 +3,7 @@ This is a Next.js project built on top of the following technologies:
 - React
 - Tailwind
 - Typescript
-- Better-SQLite3
+- MongoDB Atlas
 - Jest
 - Cypress
 - Framer Motion

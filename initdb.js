@@ -1,70 +1,55 @@
-const sql = require('better-sqlite3');
-const db = sql('userdata.db');
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri =
+  'mongodb+srv://namphan:I6qnJueLp06NdwfA@dashboard.mvhe8u3.mongodb.net/?retryWrites=true&w=majority';
 
-db.prepare(
-  `
-  CREATE TABLE IF NOT EXISTS logins (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    userName TEXT NOT NULL UNIQUE,
-    password TEXT NOT NULL,
-    token TEXT NOT NULL UNIQUE
-  )
-`
-).run();
-
-db.prepare(
-  `
-  CREATE TABLE IF NOT EXISTS todos (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    userId INTEGER NOT NULL,
-    text TEXT NOT NULL,
-    deadline TEXT NOT NULL,
-    FOREIGN KEY (userId) REFERENCES logins(id)
-  )
-`
-).run();
-
-const testLogins = [
-  {
-    userName: 'admin',
-    password: 'admin',
-    token: '1',
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
   },
-];
-
-const testTodos = [
-  {
-    userName: 'admin',
-    todos: [
-      { text: 'Finish TypeScript assignment', deadline: '2024-02-10' },
-      { text: 'Grocery shopping for the week', deadline: '2024-02-08' },
-      { text: 'Schedule dentist appointment', deadline: '2024-02-15' },
-      { text: 'Book flight tickets', deadline: '2024-03-01' },
-    ],
-  },
-];
+});
 
 async function initData() {
-  const addTestLogins = db.prepare(`
-    INSERT INTO logins (userName, password, token) VALUES (@userName, @password, @token)
-  `);
+  try {
+    await client.connect();
+    const database = client.db('dashboard');
+    const logins = database.collection('logins');
+    const todos = database.collection('todos');
 
-  for (const login of testLogins) {
-    addTestLogins.run(login);
-  }
+    const testLogin = {
+      userName: 'admin',
+      password: 'admin',
+      token: '1',
+    };
 
-  const addTestTodos = db.prepare(`
-    INSERT INTO todos (userId, text, deadline) VALUES (
-      (SELECT id FROM logins WHERE userName = @userName),
-      @text,
-      @deadline
-    )
-  `);
+    let adminLogin = await logins.findOne({ userName: 'admin' });
 
-  for (const { userName, todos } of testTodos) {
-    todos.forEach((todo) => {
-      addTestTodos.run({ userName, ...todo });
-    });
+    if (!adminLogin) {
+      await logins.insertOne(testLogin);
+      adminLogin = await logins.findOne({ userName: 'admin' });
+    }
+
+    if (adminLogin) {
+      const testTodos = [
+        { text: 'Finish TypeScript assignment', deadline: '2024-02-10' },
+        { text: 'Grocery shopping for the week', deadline: '2024-02-08' },
+        { text: 'Schedule dentist appointment', deadline: '2024-02-15' },
+        { text: 'Book flight tickets', deadline: '2024-03-01' },
+      ];
+
+      await Promise.all(testTodos.map((todo) => {
+        return todos.updateOne(
+          { text: todo.text, userId: adminLogin._id },
+          { $set: { ...todo, userId: adminLogin._id } },
+          { upsert: true }
+        );
+      }));
+    }
+  } catch (error) {
+    console.error('Error during initialization:', error);
+  } finally {
+    await client.close();
   }
 }
 
