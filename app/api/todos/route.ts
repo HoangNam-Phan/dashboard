@@ -2,7 +2,7 @@ import type { NextRequest } from 'next/server';
 import type { UserEntry } from '@/lib/types';
 import sql from 'better-sqlite3';
 
-const db = sql('./userdata.db');
+const db = sql('db/userdata.db');
 
 function getToken(req: NextRequest): string | null {
   return req.cookies.get('token')?.value || null;

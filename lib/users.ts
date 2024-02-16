@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { User, UserEntry } from './types';
 
-const db = sql('userdata.db');
+const db = sql('db/userdata.db');
 
 function hashPassword(password: string | Buffer) {
   return bcrypt.hashSync(password, 10);
