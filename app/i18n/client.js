@@ -1,5 +1,3 @@
-'use client';
-
 import { useEffect, useState } from 'react';
 import i18next from 'i18next';
 import { initReactI18next, useTranslation as useTranslationOrg } from 'react-i18next';
@@ -20,29 +18,34 @@ i18next
     detection: {
       order: ['path', 'htmlTag', 'cookie', 'navigator'],
     },
-    preload: runsOnServerSide ? languages : []
+    preload: runsOnServerSide ? languages : [],
   });
 
 export function useTranslation(lng, ns, options) {
   const [cookies, setCookie] = useCookies([cookieName]);
   const ret = useTranslationOrg(ns, options);
   const { i18n } = ret;
-  if (runsOnServerSide && lng && i18n.resolvedLanguage !== lng) {
-    i18n.changeLanguage(lng);
-  } else {
-    const [activeLng, setActiveLng] = useState(i18n.resolvedLanguage);
-    useEffect(() => {
-      if (activeLng === i18n.resolvedLanguage) return;
-      setActiveLng(i18n.resolvedLanguage);
-    }, [activeLng, i18n.resolvedLanguage]);
-    useEffect(() => {
-      if (!lng || i18n.resolvedLanguage === lng) return;
+  const [activeLng, setActiveLng] = useState(i18n.resolvedLanguage);
+
+  useEffect(() => {
+    if (runsOnServerSide && lng && i18n.resolvedLanguage !== lng) {
       i18n.changeLanguage(lng);
-    }, [lng, i18n]);
-    useEffect(() => {
-      if (cookies.i18next === lng) return;
+    }
+  }, [lng, i18n, runsOnServerSide]);
+
+  useEffect(() => {
+    if (activeLng !== i18n.resolvedLanguage) {
+      setActiveLng(i18n.resolvedLanguage);
+    }
+
+    if (lng && i18n.resolvedLanguage !== lng) {
+      i18n.changeLanguage(lng);
+    }
+
+    if (cookies[cookieName] !== lng) {
       setCookie(cookieName, lng, { path: '/' });
-    }, [lng, cookies.i18next]);
-  }
+    }
+  }, [activeLng, lng, i18n, cookies, setCookie]);
+  
   return ret;
 }
