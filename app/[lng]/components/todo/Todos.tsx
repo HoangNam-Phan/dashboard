@@ -71,7 +71,7 @@ export default function Todos({ t }: TodosProps) {
       prevState,
       formData,
       actionType,
-      currentTodo?.id
+      currentTodo?._id
     );
 
     if (!response.ok) {

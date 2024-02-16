@@ -28,7 +28,7 @@ function getUserData(formData: FormData): FormUser {
 export async function registerUser(prevState: FormStatus, formData: FormData) {
   const user = getUserData(formData);
 
-  const duplicateUsername = isExistingUser(user as User);
+  const duplicateUsername = await isExistingUser(user as User);
   if (duplicateUsername) {
     return { message: { userName: 'errorMessages.userNameTaken' } };
   }
@@ -42,7 +42,7 @@ export async function registerUser(prevState: FormStatus, formData: FormData) {
 
 export async function loginUser(prevState: FormStatus, formData: FormData) {
   const user = getUserData(formData);
-  const login = isValidUser(user as User);
+  const login = await isValidUser(user as User);
 
   if (!login.success) {
     return { message: login.message };
