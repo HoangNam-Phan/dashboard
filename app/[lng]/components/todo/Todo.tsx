@@ -19,6 +19,7 @@ export function Todo({ todo, onEdit, onDelete, t }: TodoProps) {
 
   return (
     <motion.li
+      data-testid="todoListItem"
       className="bg-slate-200 dark:bg-gray-400 text-gray-900 mb-5 p-3 rounded-lg shadow-lg"
       variants={{
         hidden: { opacity: 0, y: 10 },
@@ -36,6 +37,7 @@ export function Todo({ todo, onEdit, onDelete, t }: TodoProps) {
       <div className="mt-3 flex justify-end space-x-2">
         <motion.button
           type="button"
+          data-testid="editTodoButton"
           onClick={handleEditClick}
           whileHover={{ rotate: 360 }}
         >
@@ -43,6 +45,7 @@ export function Todo({ todo, onEdit, onDelete, t }: TodoProps) {
         </motion.button>
         <motion.button
           type="button"
+          data-testid="deleteTodoButton"
           onClick={handleDeleteClick}
           whileHover={{ rotate: 180 }}
         >
