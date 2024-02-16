@@ -12,7 +12,7 @@ type RootParams = {
 };
 
 export const metadata: Metadata = {
-  title: '- board',
+  title: 'Dashboard - Nam Phan',
   description: 'Dashboard project created by Nam Phan',
 };
 
