@@ -26,14 +26,15 @@ export default function Footer() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const navLinkStyles =
-    'py-1 lg:py-2 px-3 transition bg-white hover:bg-blue-500 hover:text-white duration-300';
+  const navLinkStyles = 'py-1 lg:py-2 px-3 transition duration-300';
   const disabledNavLinkStyles = 'py-1 lg:py-2 px-3 text-gray-300 bg-white';
   const conditionalNavClasses = loggedIn
     ? disabledNavLinkStyles
     : navLinkStyles;
   const activeClass = (path: string) => {
-    return pathname === `/${lang}${path}` ? 'bg-blue-600 text-white' : '';
+    return pathname === `/${lang}${path}`
+      ? 'bg-blue-500 text-white'
+      : 'bg-white hover:bg-blue-500 hover:text-white';
   };
 
   function toggleDarkmode() {
@@ -98,7 +99,7 @@ export default function Footer() {
           </Link>
           <motion.button
             type="button"
-            className={`${navLinkStyles} rounded-r-full`}
+            className={`${navLinkStyles} bg-white hover:bg-blue-500 hover:text-white rounded-r-full`}
             onClick={toggleDarkmode}
           >
             {darkmode ? (
