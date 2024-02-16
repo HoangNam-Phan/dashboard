@@ -24,7 +24,7 @@ export default function TodoForm({
     <form className="flex flex-col space-y-5" action={formAction}>
       {actionType === 'DELETE' ? (
         <>
-          <p className='pt-5'>{t('todos.form.deleteWarning')}</p>
+          <p className="pt-5">{t('todos.form.deleteWarning')}</p>
           <button
             className={`text-red-700 border-red-500 hover:bg-red-500
               hover:text-white ${ctaClasses}`}

@@ -66,14 +66,14 @@ export default function Header() {
           )}
         </AnimatePresence>
         <Link
-          className={lang === 'en' ? 'font-bold' : ''}
+          className={translationLang === 'en' ? 'font-bold' : ''}
           onClick={() => toggleLanguage('en')}
           href={`/en`}
         >
           EN
         </Link>
         <Link
-          className={lang === 'de' ? 'font-bold' : ''}
+          className={translationLang === 'de' ? 'font-bold' : ''}
           onClick={() => toggleLanguage('de')}
           href={`/de`}
         >

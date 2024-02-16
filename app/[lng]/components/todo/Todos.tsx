@@ -92,6 +92,7 @@ export default function Todos({ t }: TodosProps) {
         ) : (
           <div className="h-5/6 lg:pr-3 overflow-y-auto">
             <motion.ol
+              data-testid="todoList"
               variants={{ visible: { transition: { staggerChildren: 0.3 } } }}
             >
               {todoData?.map((todo) => (
@@ -106,6 +107,7 @@ export default function Todos({ t }: TodosProps) {
             </motion.ol>
             <motion.button
               type="button"
+              data-testid="addTodoButton"
               whileHover={{ scale: 1.5 }}
               className="absolute bottom-0 right-0"
               onClick={handleAddClick}

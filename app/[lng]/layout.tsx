@@ -12,7 +12,7 @@ type RootParams = {
 };
 
 export const metadata: Metadata = {
-  title: '- board',
+  title: 'Dashboard - Nam Phan',
   description: 'Dashboard project created by Nam Phan',
 };
 
@@ -26,7 +26,7 @@ export default function RootLayout({
 }: Readonly<RootParams>) {
   return (
     <html lang={lng} dir={dir(lng)}>
-      <body className="h-screen overflow-hidden">
+      <body className="font-mono h-screen overflow-hidden">
         <BodyWrapper>{children}</BodyWrapper>
       </body>
     </html>

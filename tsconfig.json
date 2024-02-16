@@ -18,9 +18,11 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
-    }
+      "@/*": ["./*"],
+      "@/components/*": ["components/*"]
+    },
+    "baseUrl": "./",
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "lib/logins.js", "app/i18n/index.js", "app/i18n/client.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "lib/logins.js", "app/i18n/index.js", "app/i18n/client.js", "__tests__/passwordValidation.test.js"],
   "exclude": ["node_modules"]
 }

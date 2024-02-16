@@ -5,37 +5,28 @@ import { fallbackLang, languages, cookieName } from './app/i18n/settings';
 
 acceptLanguage.languages(languages);
 
-function setCurentLang(req: NextRequest) {
-  let lang;
+function setCurrentLang(req: NextRequest) {
+  const cookieLang = req.cookies.get(cookieName)?.value;
+  if (cookieLang && languages.includes(cookieLang)) {
+    return acceptLanguage.get(cookieLang);
+  }
+  const headerLang = req.headers.get('Accept-Language');
+  if (headerLang) {
+    return acceptLanguage.get(headerLang);
+  }
 
-  if (req.cookies.has(cookieName)) {
-    return (lang = acceptLanguage.get(req.cookies.get(cookieName)?.value));
-  }
-  if (!lang) {
-    return (lang = acceptLanguage.get(req.headers.get('Accept-Language')));
-  }
-  if (!lang) {
-    return (lang = fallbackLang);
-  }
+  return fallbackLang;
 }
 
 function navigationGuard(req: NextRequest, lang: string | undefined | null) {
   const path = req.nextUrl.pathname;
   const authToken = req.cookies.get('token')?.value;
 
-  if (
-    (!authToken && path === '/de/dashboard') ||
-    (!authToken && path === '/en/dashboard')
-  ) {
+  if (!authToken && path.includes('/dashboard')) {
     return NextResponse.redirect(new URL(`/${lang}/login`, req.url));
   }
   if (authToken) {
-    if (
-      path === '/de/login' ||
-      path === '/de/signup' ||
-      path === '/en/login' ||
-      path === '/en/signup'
-    ) {
+    if (path.includes('/signup') || path.includes('/login')) {
       return NextResponse.redirect(new URL(`/${lang}/dashboard`, req.url));
     }
   }
@@ -63,7 +54,7 @@ function updateLang(req: NextRequest) {
 }
 
 export function middleware(req: NextRequest) {
-  const currentLang = setCurentLang(req);
+  const currentLang = setCurrentLang(req);
 
   if (
     !languages.some((lang) => req.nextUrl.pathname.startsWith(`/${lang}`)) &&
