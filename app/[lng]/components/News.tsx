@@ -35,7 +35,7 @@ export default function News({ t }: NewsProps) {
       <h2 className="text-2xl font-bold mb-2 lg:mb-5">{t('news.title')}</h2>
       {isLoading ? (
         <Loading />
-      ) : (
+      ) : news ? (
         <motion.ul
           variants={{ visible: { transition: { staggerChildren: 0.5 } } }}
           className="h-full overflow-y-auto space-y-5 lg:pr-3"
@@ -89,6 +89,8 @@ export default function News({ t }: NewsProps) {
             }
           })}
         </motion.ul>
+      ) : (
+        <p>{t('news.error')}</p>
       )}
     </div>
   );

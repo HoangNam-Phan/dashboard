@@ -56,7 +56,8 @@
 
   "news": {
     "title": "Aktuelle Nachrichten",
-    "readMore": "mehr..."
+    "readMore": "mehr...",
+    "error": "Der News API ist nur auf localhost verfügbar, sorry! Falls Sie das Feature testen wollen, müssen Sie das Projekt lokal laufen lassen."
   },
 
   "todos": {
