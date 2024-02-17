@@ -128,7 +128,7 @@ export default function UserForm({
                     animate={{ opacity: 1, y: 0 }}
                     className="text-lg text-green-600 font-semibold"
                   >
-                    {t('register.success')}
+                    {title === 'register.title' ? t('register.success') : t('login.success')}
                   </motion.p>
                 </div>
               ) : null}

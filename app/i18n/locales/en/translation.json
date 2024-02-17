@@ -10,7 +10,8 @@
 
   "login": {
     "title": "Login",
-    "cta": "Login"
+    "cta": "Login",
+    "success": "Login successful! Redirecting to dashboard page..."
   },
 
   "register": {
