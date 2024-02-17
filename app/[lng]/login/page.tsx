@@ -12,12 +12,14 @@ import { useRouter } from 'next/navigation';
 import { setIsLoggedIn } from '@/store/reducers/login';
 import { RootState } from '@/store/store';
 import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import Cookies from 'js-cookie';
 
 export default function Login({ params: { lng } }: LanguageParams) {
   // @ts-ignore
   const [state, formAction] = useFormState(loginAndSetToken, null);
   const lang = useSelector((state: RootState) => state.language.lang);
+  const [loginSuccessful, setLoginSuccessful] = useState(false);
   const dispatch = useDispatch();
   const { t } = useTranslation(lng);
   const router = useRouter();
@@ -25,9 +27,13 @@ export default function Login({ params: { lng } }: LanguageParams) {
   async function loginAndSetToken(prevState: FormStatus, formData: FormData) {
     const login = await loginUser(prevState, formData);
     if (login?.token) {
-      Cookies.set('token', login.token, { expires: 30 })
+      Cookies.set('token', login.token, { expires: 30 });
       dispatch(setIsLoggedIn(true));
-      router.push(`/${lang}/dashboard`);
+      setLoginSuccessful(true);
+
+      setTimeout(() => {
+        router.push(`/${lang}/dashboard`);
+      }, 1000);
     }
 
     return login;
@@ -38,6 +44,7 @@ export default function Login({ params: { lng } }: LanguageParams) {
       <LoginForm
         title="login.title"
         submitText="login.cta"
+        success={loginSuccessful}
         formAction={formAction}
         error={state as UserErrorMessage}
         t={t}

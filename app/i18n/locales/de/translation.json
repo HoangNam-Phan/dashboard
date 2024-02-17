@@ -10,7 +10,8 @@
 
   "login": {
     "title": "Einloggen",
-    "cta": "Einloggen"
+    "cta": "Einloggen",
+    "success": "Login erfolgreich! Weiterleitung zur Dashboard Seite..."
   },
 
   "register": {
