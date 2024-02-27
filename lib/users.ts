@@ -3,8 +3,7 @@ import jwt from 'jsonwebtoken';
 import { User, UserEntry } from './types';
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri =
-  'mongodb+srv://namphan:I6qnJueLp06NdwfA@dashboard.mvhe8u3.mongodb.net/?retryWrites=true&w=majority';
+const uri = process.env.MONGODB_URI;
 
 const client = new MongoClient(uri, {
   serverApi: {

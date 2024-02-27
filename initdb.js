@@ -1,6 +1,5 @@
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri =
-  'mongodb+srv://namphan:I6qnJueLp06NdwfA@dashboard.mvhe8u3.mongodb.net/?retryWrites=true&w=majority';
+const uri = process.env.MONGODB_URI;
 
 const client = new MongoClient(uri, {
   serverApi: {
@@ -38,13 +37,15 @@ async function initData() {
         { text: 'Book flight tickets', deadline: '2024-03-01' },
       ];
 
-      await Promise.all(testTodos.map((todo) => {
-        return todos.updateOne(
-          { text: todo.text, userId: adminLogin._id },
-          { $set: { ...todo, userId: adminLogin._id } },
-          { upsert: true }
-        );
-      }));
+      await Promise.all(
+        testTodos.map((todo) => {
+          return todos.updateOne(
+            { text: todo.text, userId: adminLogin._id },
+            { $set: { ...todo, userId: adminLogin._id } },
+            { upsert: true }
+          );
+        })
+      );
     }
   } catch (error) {
     console.error('Error during initialization:', error);

@@ -6,12 +6,12 @@ import HighchartsReact from 'highcharts-react-official';
 import Loading from './modules/Loading';
 import { RootState } from '@/store/store';
 import { useSelector } from 'react-redux';
+import { fetchStockData } from '@/lib/fetchStocks';
 import {
   ChartOptions,
   initialChartOptions,
   popularStocksAndCrypto,
-  fetchStockData,
-} from '@/lib/stocks';
+} from '@/lib/stocksData';
 
 type StocksProps = {
   t: (key: string) => string;
@@ -21,7 +21,7 @@ export default function Stocks({ t }: StocksProps) {
   const [displayedStock, setDisplayedStock] = useState(
     popularStocksAndCrypto[0]
   );
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
   const [options, setOptions] = useState<ChartOptions>(initialChartOptions);
   const darkmode = useSelector((state: RootState) => state.darkmode.darkmode);
 

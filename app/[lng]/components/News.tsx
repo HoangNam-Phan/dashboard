@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import type { NewsResponse } from '@/lib/types';
 import Loading from './modules/Loading';
 import { motion } from 'framer-motion';
+import { fetchNewsData } from '@/lib/fetchNews';
 
 type NewsProps = {
   t: (key: string) => string;
@@ -14,20 +15,14 @@ export default function News({ t }: NewsProps) {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchTodos() {
-      const response = await fetch(
-        'https://newsapi.org/v2/top-headlines?country=us&apiKey=1d992f2df73c4024b7784330d4b8f0cb'
-      );
-      if (!response.ok) {
-        setLoading(false);
-        throw new Error('Failed to fetch news');
-      }
-      const newsData = await response.json();
+    async function fetchNews() {
+      const newsData = await fetchNewsData();
+
       setNews(newsData);
       setLoading(false);
     }
 
-    fetchTodos();
+    fetchNews();
   }, []);
 
   return (
