@@ -8,9 +8,11 @@ This is a Next.js project built on top of the following technologies:
 - Cypress
 - Framer Motion
 
-To run this app locally, use one of the following commands:
+To run this app locally, you first need to install the packages with npm install.
 
-npm run dev / yarn dev/ pnpm dev / bun dev
+Then run the local development server with either:
+
+npm run dev / yarn dev / pnpm dev / bun dev
 
 This projects sole purpose is to act as a showcase app and is not meant for personal use, so please refrain from
 using any personal data. For ease of use, i added the .env.local to the github repo. In a real world application,
