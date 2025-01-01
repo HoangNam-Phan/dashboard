@@ -9,6 +9,7 @@ This is a Next.js project built on top of the following technologies:
 - Framer Motion
 
 To run this app locally, you first need to install the packages with npm install.
+If youre encountering any issues, make sure you have python installed on youre local machine.
 
 Then run the local development server with either:
 
